@@ -14,12 +14,12 @@
     $select->execute();
     $row = $select->fetch(PDO::FETCH_ASSOC); // we store the query in row variable
 
-    //comparing if input variables are equal to useremail and password database filds
-    if($row['useremail']==$useremail AND $row['password']==$password){
+    //comparing if input variables are equal to useremail and password database filds | also checks if admin role will redirect to dashboard if not to user
+    if($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="Admin"){
       echo $success='Login successfully';
       header('refresh:2;dashboard.php');
-    }else{
-      echo 'Login Fail';
+    }else if ($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="User"){
+      header('refresh:2;user.php');
     }
   }
 ?>
