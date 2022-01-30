@@ -16,9 +16,22 @@
 
     //comparing if input variables are equal to useremail and password database filds | also checks if admin role will redirect to dashboard if not to user
     if($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="Admin"){
+      //blocking to access admin dashboard without typing the credentials, adding session variables and storing user info on those variables, 
+      //you need to get this variables on dashboard.php
+      $_SESSION['userid'] = $row['userid'];
+      $_SESSION['username'] = $row['username'];
+      $_SESSION['useremail'] = $row['useremail'];
+      $_SESSION['role'] = $row['role'];
+
       echo $success='Login successfully';
       header('refresh:2;dashboard.php');
     }else if ($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="User"){
+      $_SESSION['userid'] = $row['userid'];
+      $_SESSION['username'] = $row['username'];
+      $_SESSION['useremail'] = $row['useremail'];
+      $_SESSION['role'] = $row['role'];
+      
+      echo $success='Login successfully';
       header('refresh:2;user.php');
     }
   }
