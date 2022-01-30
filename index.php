@@ -1,12 +1,26 @@
-<?php 
+<?php
+  error_reporting(0); 
   include_once 'connectdb.php';
   session_start();
 
-  if(isset($_POST['btn_login'])){
-    $useremail = $_POST['txt_useremail'];
-    $password = $_POST['txt_password'];
+  if(isset($_POST['btn_login'])){  //if btn_login button is pressed
+    $useremail = $_POST['txt_useremail'];  //store in variable useremail input from txt_useremail
+    $password = $_POST['txt_password'];  //store in variable password input from txt_password
+    
+    //echo $useremail." ".$password;
 
-    echo $useremail." ".$password;
+    //getting email and password from database where input variables $username and $password
+    $select = $pdo->prepare("SELECT * FROM tbl_user WHERE useremail='$useremail' AND password='$password'");
+    $select->execute();
+    $row = $select->fetch(PDO::FETCH_ASSOC); // we store the query in row variable
+
+    //comparing if input variables are equal to useremail and password database filds
+    if($row['useremail']==$useremail AND $row['password']==$password){
+      echo $success='Login successfully';
+      header('refresh:2;dashboard.php');
+    }else{
+      echo 'Login Fail';
+    }
   }
 ?>
 
