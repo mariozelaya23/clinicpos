@@ -1,3 +1,15 @@
+<?php 
+  include_once 'connectdb.php';
+  session_start();
+
+  if(isset($_POST['btn_login'])){
+    $useremail = $_POST['txt_useremail'];
+    $password = $_POST['txt_password'];
+
+    echo $useremail." ".$password;
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,14 +31,14 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="index2.html" class="h1"><b>CLINIC</b>POS</a>
+      <a href="index.php" class="h1"><b>CLINIC</b>POS</a>
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Ingrese sus credenciales para iniciar sesión</p>
 
-      <form action="index3.html" method="post">
+      <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" placeholder="Email" name="txt_useremail">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -34,7 +46,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" name="txt_password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -43,17 +55,18 @@
         </div>
         <div class="row">
           <div class="col-8">
+            <a href="forgot-password.html">Olvide mi contraseña</a>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-primary btn-block" name="btn_login">Log In</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
       <p class="mb-1">
-        <a href="forgot-password.html">I forgot my password</a>
+        
       </p>
     </div>
     <!-- /.card-body -->
