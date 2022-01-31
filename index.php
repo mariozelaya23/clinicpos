@@ -117,7 +117,7 @@
         </div>
         <div class="row">
           <div class="col-8">
-            <a href="forgot-password.html">Olvide mi contraseña</a>
+            <a href="#" onclick="swal('Para cambio de contraseña ','contacte al administrador','error')">Olvide mi contraseña</a>
           </div>
           <!-- /.col -->
           <div class="col-4">
