@@ -1,3 +1,12 @@
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- Sweetalert2 -->
+<script src="plugins/sweetalert/sweetalert.js"></script>
+
 <?php
   error_reporting(0); 
   include_once 'connectdb.php';
@@ -23,7 +32,20 @@
       $_SESSION['useremail'] = $row['useremail'];
       $_SESSION['role'] = $row['role'];
 
-      echo $success='Login successfully';
+      // success alert login for admin
+      echo '<script type="text/javascript">
+      jQuery(function validation(){
+
+        swal({
+          title: "Good job!'." ".$_SESSION['username'].'",
+          text: "Welcome!'." ".$_SESSION['role'].'",
+          icon: "success",
+          button: "Loading...",
+        });
+
+      })
+
+      </script>';
       header('refresh:2;dashboard.php');
     }else if ($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="User"){
       $_SESSION['userid'] = $row['userid'];
@@ -31,7 +53,20 @@
       $_SESSION['useremail'] = $row['useremail'];
       $_SESSION['role'] = $row['role'];
       
-      echo $success='Login successfully';
+      // success alert login for user
+      echo '<script type="text/javascript">
+      jQuery(function validation(){
+
+        swal({
+          title: "Good job!'." ".$_SESSION['username'].'",
+          text: "Welcome!'." ".$_SESSION['role'].'",
+          icon: "success",
+          button: "Loading...",
+        });
+
+      })
+
+      </script>';
       header('refresh:2;user.php');
     }
   }
@@ -65,7 +100,7 @@
 
       <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email" name="txt_useremail">
+          <input type="email" class="form-control" placeholder="Email" name="txt_useremail" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -73,7 +108,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password" name="txt_password">
+          <input type="password" class="form-control" placeholder="Password" name="txt_password" required>
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -102,11 +137,6 @@
 </div>
 <!-- /.login-box -->
 
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+
 </body>
 </html>
