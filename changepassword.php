@@ -1,9 +1,18 @@
 <?php
   include_once'connectdb.php';
   session_start();
-  include_once'header.php';
 
-  // when click on update password button we get values from user into variables
+  if($_SESSION['useremail']==""){  //with this session variable changepassword.php wont open until you login
+    header('location:index.php');
+  }
+
+  if($_SESSION['role']=="Admin"){
+    include_once'header.php';
+  }else{
+    include_once'headeruser.php';
+  }
+
+  // when click on update password button we get values from USER into variables
   if(isset($_POST['btn_update'])){
     $oldpassword_txt=$_POST['txt_oldpass'];
     $newpassword_txt=$_POST['txt_newpass'];
@@ -17,9 +26,79 @@
     $select->execute();
     $row = $select->fetch(PDO::FETCH_ASSOC);
 
-    echo $row['useremail'];
-    echo $row['username'];
+    $useremail_db = $row['useremail']; // asigning values from DATABASE
+    $password_db = $row['password']; //asigning values from DATABASE
 
+    //compare userinput and database values
+    if($oldpassword_txt == $password_db){  //check old password with the actual value in the database
+      if($newpassword_txt == $confpassword_txt){  // compare 2 fields password should be the same, if both are the same, it will run the query
+        $update = $pdo->prepare("UPDATE tbl_user SET password=:pass WHERE useremail=:email");  //placeholders :pass and :email
+        $update->bindParam(':pass',$confpassword_txt); 
+        $update->bindParam(':email',$email);
+
+        if($update->execute()){
+          //message to show the password has been successfully updated
+          echo '<script type="text/javascript">
+          jQuery(function validation(){
+    
+            swal({
+              title: "Muy bien!",
+              text: "¡Contraseña actualizada correctamente!",
+              icon: "success",
+              button: "Ok",
+            });
+    
+          })
+    
+          </script>';
+        }else{
+          //message: the password has not been updated
+          echo '<script type="text/javascript">
+          jQuery(function validation(){
+    
+            swal({
+              title: "Error!",
+              text: "¡La contraseña no se ha podido actualizar!",
+              icon: "error",
+              button: "Ok",
+            });
+    
+          })
+    
+          </script>';
+        }
+      }else{
+        //message: old and new password does not match
+        echo '<script type="text/javascript">
+          jQuery(function validation(){
+    
+            swal({
+              title: "Ops!",
+              text: "¡La nueva contraseña y confirmar contraseña no coinciden!",
+              icon: "warning",
+              button: "Ok",
+            });
+    
+          })
+    
+          </script>';
+      }
+    }else{
+      //message if old password is wrong
+      echo '<script type="text/javascript">
+      jQuery(function validation(){
+
+        swal({
+          title: "Error!!",
+          text: "¡Contraseña antigua no coincide!",
+          icon: "warning",
+          button: "Ok",
+        });
+
+      })
+
+      </script>';
+    }
   }
 
 
@@ -54,19 +133,19 @@
         <div class="card-body">
           <div class="form-group">
             <label for="exampleInputPassword1">Contraseña antigua</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="txt_oldpass">
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password" name="txt_oldpass" required>
           </div>
         </div>
         <div class="card-body">
           <div class="form-group">
             <label for="exampleInputPassword1">Nueva contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="txt_newpass">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="txt_newpass" required>
           </div>
         </div>
         <div class="card-body">
           <div class="form-group">
             <label for="exampleInputPassword1">Confirmar contraseña</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="txt_confpass">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="txt_confpass" required>
           </div>
         </div>
         <!-- /.card-body -->
