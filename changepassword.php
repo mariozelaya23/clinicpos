@@ -2,6 +2,27 @@
   include_once'connectdb.php';
   session_start();
   include_once'header.php';
+
+  // when click on update password button we get values from user into variables
+  if(isset($_POST['btn_update'])){
+    $oldpassword_txt=$_POST['txt_oldpass'];
+    $newpassword_txt=$_POST['txt_newpass'];
+    $confpassword_txt=$_POST['txt_confpass'];
+
+    //echo $oldpassword_txt." ".$newpassword_txt." ".$confpassword_txt;
+
+    //using of select query we get database record according to useremail
+    $email = $_SESSION['useremail'];
+    $select = $pdo->prepare("SELECT * FROM tbl_user WHERE useremail='$email'");
+    $select->execute();
+    $row = $select->fetch(PDO::FETCH_ASSOC);
+
+    echo $row['useremail'];
+    echo $row['username'];
+
+  }
+
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -29,7 +50,7 @@
       </div>
       <!-- /.card-header -->
       <!-- form start -->
-      <form>
+      <form action="" method="POST">
         <div class="card-body">
           <div class="form-group">
             <label for="exampleInputPassword1">Contraseña antigua</label>
