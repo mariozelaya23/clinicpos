@@ -68,6 +68,20 @@
 
       </script>';
       header('refresh:2;user.php');
+    }else{
+      echo '<script type="text/javascript">
+      jQuery(function validation(){
+
+        swal({
+          title: "Error!",
+          text: "Correo o contraseña no validos!!",
+          icon: "error",
+          button: "Ok",
+        });
+
+      })
+
+      </script>';
     }
   }
 ?>
