@@ -20,40 +20,60 @@
 
     //echo $username.' '.$useremail.' '.$password.' '.$userrole;
 
-    $insert = $pdo->prepare("INSERT INTO tbl_user(username,useremail,password,role) VALUES(:name,:email,:pass,:role)");  // insert query
+    if(isset($_POST['txtemail'])){
+      $select = $pdo->prepare("SELECT useremail FROM tbl_user WHERE useremail='$useremail'");
+      $select->execute();
 
-    $insert->bindParam(':name',$username); //passing values from placeholders into the variables
-    $insert->bindParam(':email',$useremail);
-    $insert->bindParam(':pass',$password);
-    $insert->bindParam(':role',$userrole);
-
-
-    if($insert->execute()){
-      echo '<script type="text/javascript">
-      jQuery(function validation(){
+      if($select->rowCount() > 0){  //if rowcount is greater that 0 that means that the useremail already exist
+        echo '<script type="text/javascript">
+        jQuery(function validation(){
   
-        swal({
-          title: "Muy bien",
-          text: "EL usuario se a guardado correctamente",
-          icon: "success",
-          button: "Ok",
-        });
+          swal({
+            title: "Error!",
+            text: "¡El correo ingresado ya existe, favor ingresar otro!",
+            icon: "error",
+            button: "Ok",
+          });
   
-      })
-      </script>';
-    }else{
-      echo '<script type="text/javascript">
-            jQuery(function validation(){
-    
-              swal({
-                title: "Error!",
-                text: "No se pudo registrar el usuario!",
-                icon: "error",
-                button: "Ok",
-              });
-    
-            })
-            </script>';
+        })
+        </script>';
+      }else{
+        $insert = $pdo->prepare("INSERT INTO tbl_user(username,useremail,password,role) VALUES(:name,:email,:pass,:role)");  // insert query
+
+        $insert->bindParam(':name',$username); //passing values from placeholders into the variables
+        $insert->bindParam(':email',$useremail);
+        $insert->bindParam(':pass',$password);
+        $insert->bindParam(':role',$userrole);
+
+
+        if($insert->execute()){
+          echo '<script type="text/javascript">
+          jQuery(function validation(){
+      
+            swal({
+              title: "Muy bien",
+              text: "EL usuario se a guardado correctamente",
+              icon: "success",
+              button: "Ok",
+            });
+      
+          })
+          </script>';
+        }else{
+          echo '<script type="text/javascript">
+          jQuery(function validation(){
+
+            swal({
+              title: "Error!",
+              text: "No se pudo registrar el usuario!",
+              icon: "error",
+              button: "Ok",
+            });
+
+          })
+          </script>';
+        }
+      }
     }
 
   }
