@@ -12,6 +12,53 @@
     include_once'headeruser.php';
   }
 
+  if(isset($_POST['btnsave'])){   //if btnsave is click then we get the values from the user input, and we store the values in the $variables
+    $username = $_POST['txtname'];
+    $useremail = $_POST['txtemail'];
+    $password = $_POST['txtpassword'];
+    $userrole = $_POST['selectrole'];
+
+    //echo $username.' '.$useremail.' '.$password.' '.$userrole;
+
+    $insert = $pdo->prepare("INSERT INTO tbl_user(username,useremail,password,role) VALUES(:name,:email,:pass,:role)");  // insert query
+
+    $insert->bindParam(':name',$username); //passing values from placeholders into the variables
+    $insert->bindParam(':email',$useremail);
+    $insert->bindParam(':pass',$password);
+    $insert->bindParam(':role',$userrole);
+
+
+    if($insert->execute()){
+      echo '<script type="text/javascript">
+      jQuery(function validation(){
+  
+        swal({
+          title: "Muy bien",
+          text: "EL usuario se a guardado correctamente",
+          icon: "success",
+          button: "Ok",
+        });
+  
+      })
+      </script>';
+    }else{
+      echo '<script type="text/javascript">
+            jQuery(function validation(){
+    
+              swal({
+                title: "Error!",
+                text: "No se pudo registrar el usuario!",
+                icon: "error",
+                button: "Ok",
+              });
+    
+            })
+            </script>';
+    }
+
+  }
+
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -43,33 +90,33 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form role="form">
+        <form role="form" action="" method="POST">
           <div class="card-body">
 
             <div class="row">
               <div class="col-sm-4 col-md-4 col-lg-4">   <!-- first section 4 columns -->
                 <div class="form-group">
                   <label for="exampleInputEmail1">Nombre y Apellido</label>
-                  <input type="text" class="form-control" placeholder="Ingrese nombres y apellidos" name="">
+                  <input type="text" class="form-control" placeholder="Ingrese nombres y apellidos" name="txtname" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Correo Electrónico</label>
-                  <input type="email" class="form-control" placeholder="Ingrese el correo electrónico" name="">
+                  <input type="email" class="form-control" placeholder="Ingrese el correo electrónico" name="txtemail" required>
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Contraseña</label>
-                  <input type="password" class="form-control"  placeholder="Ingrese la contraseña" name="">
+                  <input type="password" class="form-control"  placeholder="Ingrese la contraseña" name="txtpassword" required>
                 </div>
                 <label>Role</label>
                 <div class="form-group">
-                  <select class="custom-select form-control-border" id="exampleSelectBorder">
+                  <select class="custom-select form-control-border" name="selectrole" required>
+                    <option value="" disabled selected>Seleccione un role</option>
                     <option>Usuario</option>
                     <option>Administrador</option>
-                    <option>Value 3</option>
                   </select>
                 </div>
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary" name="btnsave">Guardar</button>
                 </div>
               </div> <!-- end section 4 columns -->
 
@@ -82,7 +129,7 @@
                       <th>Correo</th>
                       <th>Contraseña</th>
                       <th>Role</th>
-                      <th>Eliminar</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody> <!-- table body --> 
@@ -99,7 +146,7 @@
                           <td>'.$row->password.'</td>
                           <td>'.$row->role.'</td>
                           <td>
-                            <a href="registration.php?id='.$row->userid.'" class="btn btn-danger" role="button" name="btndelete"><span class="glyphicon glyphicon-trash" title="delete"></span></a>
+                            <a href="registration.php?id='.$row->userid.'" class="btn btn-block btn-danger btn-xs" role="button" name="btndelete">Eliminar</a>
                           </td>
                           </tr>
                         ';
