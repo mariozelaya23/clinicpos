@@ -12,7 +12,31 @@
     include_once'headeruser.php';
   }
 
-  if(isset($_POST['btnsave'])){   //if btnsave is click then we get the values from the user input, and we store the values in the $variables
+  //DELETE action
+  error_reporting(0);
+  if($_GET['id']){ //this id comes from the URL
+    $id=$_GET['id'];
+    $delete = $pdo->prepare("DELETE FROM tbl_user WHERE userid=:id");
+    $delete->bindParam(':id', $id);
+    if($delete->execute()){
+      echo '<script type="text/javascript">
+      jQuery(function validation(){
+  
+        swal({
+          title: "Muy Bien!",
+          text: "¡EL usuario se ha eliminado exitosamente!",
+          icon: "success",
+          button: "Ok",
+        });
+  
+      })
+      </script>';
+    }
+  }
+
+
+  //1- when click on save button we get out values in the textboxes from user into variables
+  if(isset($_POST['btnsave'])){ 
     $username = $_POST['txtname'];
     $useremail = $_POST['txtemail'];
     $password = $_POST['txtpassword'];
@@ -20,6 +44,7 @@
 
     //echo $username.' '.$useremail.' '.$password.' '.$userrole;
 
+    //this condition will prevent to insert the same email
     if(isset($_POST['txtemail'])){
       $select = $pdo->prepare("SELECT useremail FROM tbl_user WHERE useremail='$useremail'");
       $select->execute();
@@ -38,6 +63,7 @@
         })
         </script>';
       }else{
+        //2- using of select query we insert into the database
         $insert = $pdo->prepare("INSERT INTO tbl_user(username,useremail,password,role) VALUES(:name,:email,:pass,:role)");  // insert query
 
         $insert->bindParam(':name',$username); //passing values from placeholders into the variables
@@ -166,7 +192,7 @@
                           <td>'.$row->password.'</td>
                           <td>'.$row->role.'</td>
                           <td>
-                            <a href="registration.php?id='.$row->userid.'" class="btn btn-block btn-danger btn-xs" role="button" name="btndelete">Eliminar</a>
+                            <a href="uregistration.php?id='.$row->userid.'" class="btn btn-block btn-danger btn-xs" role="button" name="btndelete">Eliminar</a>
                           </td>
                           </tr>
                         ';
