@@ -47,7 +47,7 @@
 
       </script>';
       header('refresh:2;dashboard.php');
-    }else if ($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="User"){
+    }else if ($row['useremail']==$useremail AND $row['password']==$password AND $row['role']=="Usuario"){
       $_SESSION['userid'] = $row['userid'];
       $_SESSION['username'] = $row['username'];
       $_SESSION['useremail'] = $row['useremail'];

@@ -167,55 +167,43 @@
               </div> <!-- end section 4 columns -->
 
               <div class="col-sm-8 col-md-8 col-lg-8">  <!-- second section 8 columns  --> 
-
-                <div class="card">  <!-- Users Table starts  -->
-                  <div class="card-header">
-                    <h3 class="card-title">Usuarios registrados al sistema</h3>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Nombre</th>
-                          <th>Correo</th>
-                          <th>Contraseña</th>
-                          <th>Role</th>
-                          <th></th>
-                          <th></th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php 
-                          $select=$pdo->prepare("SELECT * FROM tbl_user ORDER BY userid");
-                          $select->execute();
-
-                          while($row=$select->fetch(PDO::FETCH_OBJ)){  //using while to fetch all the data from the database // using FETCH_OBJ because I'm fetching each fild of the database
-                            echo '
-                              <tr>
-                                <td>'.$row->userid.'</td>
-                                <td>'.$row->username.'</td>
-                                <td>'.$row->useremail.'</td>
-                                <td>'.$row->password.'</td>
-                                <td>'.$row->role.'</td>
-                                <td>
-                                  <a href="uregistration.php?id='.$row->userid.'" class="btn btn-block btn-info btn-xs" role="button" name="btndelete">Editar</a>
-                                </td>
-                                <td>
-                                <a href="uregistration.php?id='.$row->userid.'" class="btn btn-block btn-danger btn-xs" role="button" name="btndelete">Eliminar</a>
-                                </td>
-                              </tr>
-                            ';
-                          }
-                        ?>
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- /.card-body -->
-                </div> <!-- Users Table Ends  -->
-                <!-- /.card -->  
-
+                <table class="table table-striped">
+                  <thead> <!-- table heading -->  
+                    <tr>
+                      <th>#</th>
+                      <th>Nombre</th>
+                      <th>Correo</th>
+                      <th>Contraseña</th>
+                      <th>Role</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody> <!-- table body --> 
+                    <?php
+                      $select=$pdo->prepare("SELECT * FROM tbl_user ORDER BY userid");
+                      $select->execute();
+                      
+                      while($row=$select->fetch(PDO::FETCH_OBJ)){  //using while to fetch all the data from the database // using FETCH_OBJ because I'm fetching each fild of the database
+                        echo '
+                          <tr>
+                          <td>'.$row->userid.'</td>
+                          <td>'.$row->username.'</td>
+                          <td>'.$row->useremail.'</td>
+                          <td>'.$row->password.'</td>                          
+                          <td>'.$row->role.'</td>
+                          <td>
+                          <a href="uregistration.php?id='.$row->userid.'" class="btn btn-block btn-info btn-xs" role="button" name="btndelete">Editar</a>
+                          </td>
+                          <td>
+                            <a href="uregistration.php?id='.$row->userid.'" class="btn btn-block btn-danger btn-xs" role="button" name="btndelete">Eliminar</a>
+                          </td>
+                          </tr>
+                        ';
+                      }
+                    ?>
+                  </tbody>
+                </table>
 
               </div> <!-- end section 8 columns  --> 
             </div>  

@@ -2,12 +2,15 @@
   include_once'connectdb.php';
   session_start();
 
-  if($_SESSION['useremail']==""){  //with this session variable dashboard.php wont open until you login
+  if($_SESSION['useremail']=="" OR $_SESSION['role']=="Usuario"){  //with this session variable dashboard.php wont open until you login
     header('location:index.php');
   }
 
-
-  include_once'header.php';
+  if($_SESSION['role']=="Admin"){
+    include_once'header.php';
+  }else{
+    include_once'headeruser.php';
+  }
 ?>
 
   <!-- Content Wrapper. Contains page content -->
