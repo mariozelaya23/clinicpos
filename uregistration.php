@@ -34,7 +34,7 @@
     }
   }
 
-
+  //*********** ADD BUTTON STARTS HERE ***********/
   //1- when click on save button we get out values in the textboxes from user into variables
   if(isset($_POST['btnsave'])){ 
     $username = $_POST['txtname'];
@@ -44,65 +44,172 @@
 
     //echo $username.' '.$useremail.' '.$password.' '.$userrole;
 
-    //this condition will prevent to insert the same email
-    if(isset($_POST['txtemail'])){
-      $select = $pdo->prepare("SELECT useremail FROM tbl_user WHERE useremail='$useremail'");
-      $select->execute();
+    if(empty($username) OR empty($useremail) OR empty($password) OR empty($userrole)){
+      $error = '<script type="text/javascript">
+      jQuery(function validation(){
 
-      if($select->rowCount() > 0){  //if rowcount is greater that 0 that means that the useremail already exist
-        echo '<script type="text/javascript">
-        jQuery(function validation(){
-  
-          swal({
-            title: "Error!",
-            text: "¡El correo ingresado ya existe, favor ingresar otro!",
-            icon: "error",
-            button: "Ok",
-          });
-  
-        })
-        </script>';
-      }else{
-        //2- using of select query we insert into the database
-        $insert = $pdo->prepare("INSERT INTO tbl_user(username,useremail,password,role) VALUES(:name,:email,:pass,:role)");  // insert query
+        swal({
+          title: "Error!",
+          text: "¡Debe de llenar todos los campos!",
+          icon: "error",
+          button: "Ok",
+        });
 
-        $insert->bindParam(':name',$username); //passing values from placeholders into the variables
-        $insert->bindParam(':email',$useremail);
-        $insert->bindParam(':pass',$password);
-        $insert->bindParam(':role',$userrole);
+      })
+      </script>';
+      echo $error;
+    }
 
+    if(!isset($error)){
+          //this condition will prevent to insert the same email
+      if(isset($_POST['txtemail'])){
+        $select = $pdo->prepare("SELECT useremail FROM tbl_user WHERE useremail='$useremail'");
+        $select->execute();
 
-        if($insert->execute()){
+        if($select->rowCount() > 0){  //if rowcount is greater that 0 that means that the useremail already exist
           echo '<script type="text/javascript">
           jQuery(function validation(){
-      
-            swal({
-              title: "Muy bien",
-              text: "EL usuario se a guardado correctamente",
-              icon: "success",
-              button: "Ok",
-            });
-      
-          })
-          </script>';
-        }else{
-          echo '<script type="text/javascript">
-          jQuery(function validation(){
-
+    
             swal({
               title: "Error!",
-              text: "No se pudo registrar el usuario!",
+              text: "¡El correo ingresado ya existe, favor ingresar otro!",
               icon: "error",
               button: "Ok",
             });
-
+    
           })
           </script>';
+        }else{
+          //2- using of select query we insert into the database
+          $insert = $pdo->prepare("INSERT INTO tbl_user(username,useremail,password,role) VALUES(:name,:email,:pass,:role)");  // insert query
+
+          $insert->bindParam(':name',$username); //passing values from placeholders into the variables
+          $insert->bindParam(':email',$useremail);
+          $insert->bindParam(':pass',$password);
+          $insert->bindParam(':role',$userrole);
+
+
+          if($insert->execute()){
+            echo '<script type="text/javascript">
+            jQuery(function validation(){
+        
+              swal({
+                title: "Muy bien",
+                text: "EL usuario se a guardado correctamente",
+                icon: "success",
+                button: "Ok",
+              });
+        
+            })
+            </script>';
+          }else{
+            echo '<script type="text/javascript">
+            jQuery(function validation(){
+
+              swal({
+                title: "Error!",
+                text: "No se pudo registrar el usuario!",
+                icon: "error",
+                button: "Ok",
+              });
+
+            })
+            </script>';
+          }
         }
       }
     }
+  }//***********ADD BUTTON ENDS HERE ***********/
 
-  }
+
+  //*********** UPDATE BUTTON STARTS HERE ***********/
+  if(isset($_POST['btnupdate'])){
+    $username = $_POST['txtname'];
+    $useremail = $_POST['txtemail'];
+    $password = $_POST['txtpassword'];
+    $userrole = $_POST['selectrole'];
+    $userid = $_POST['txtid'];
+
+    if(empty($username) OR empty($useremail) OR empty($password) OR empty($userrole)){
+      $errorupdate = '<script type="text/javascript">
+      jQuery(function validation(){
+
+        swal({
+          title: "Error!",
+          text: "¡Debe de llenar todos los campos!",
+          icon: "error",
+          button: "Ok",
+        });
+
+      })
+      </script>';
+      echo $errorupdate;
+    }
+
+    if(!isset($errorupdate)){
+      //this condition will prevent to insert the same email
+      if(isset($_POST['txtemail'])){
+        $select = $pdo->prepare("SELECT useremail FROM tbl_user WHERE useremail='$useremail'");
+        $select->execute();
+
+        if($select->rowCount() > 0){  //if rowcount is greater that 0 that means that the useremail already exist
+          echo '<script type="text/javascript">
+          jQuery(function validation(){
+    
+            swal({
+              title: "Error!",
+              text: "¡El correo ingresado ya existe, favor ingresar otro!",
+              icon: "error",
+              button: "Ok",
+            });
+    
+          })
+          </script>';
+        }else{
+          //2- using of select query we insert into the database
+          $insert = $pdo->prepare("UPDATE tbl_user SET username=:name,useremail=:email,password=:pass,role=:role WHERE userid=".$userid);  // insert query
+
+          $insert->bindParam(':name',$username); //passing values from placeholders into the variables
+          $insert->bindParam(':email',$useremail);
+          $insert->bindParam(':pass',$password);
+          $insert->bindParam(':role',$userrole);
+
+
+          if($insert->execute()){
+            echo '<script type="text/javascript">
+            jQuery(function validation(){
+        
+              swal({
+                title: "Muy bien",
+                text: "EL usuario se a guardado correctamente",
+                icon: "success",
+                button: "Ok",
+              });
+        
+            })
+            </script>';
+          }else{
+            echo '<script type="text/javascript">
+            jQuery(function validation(){
+
+              swal({
+                title: "Error!",
+                text: "No se pudo registrar el usuario!",
+                icon: "error",
+                button: "Ok",
+              });
+
+            })
+            </script>';
+          }
+        }
+      }
+    }    
+
+
+
+  }//***********UPDATE BUTTON ENDS HERE ***********/
+
 
 
 ?>
@@ -138,33 +245,74 @@
         <!-- form start -->
         <form role="form" action="" method="POST">
           <div class="card-body">
-
             <div class="row">
-              <div class="col-sm-4 col-md-4 col-lg-4">   <!-- first section 4 columns -->
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Nombre y Apellido</label>
-                  <input type="text" class="form-control" placeholder="Ingrese nombres y apellidos" name="txtname" required>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Correo Electrónico</label>
-                  <input type="email" class="form-control" placeholder="Ingrese el correo electrónico" name="txtemail" required>
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Contraseña</label>
-                  <input type="password" class="form-control"  placeholder="Ingrese la contraseña" name="txtpassword" required>
-                </div>
-                <label>Role</label>
-                <div class="form-group">
-                  <select class="custom-select form-control-border" name="selectrole" required>
-                    <option value="" disabled selected>Seleccione un role</option>
-                    <option>Usuario</option>
-                    <option>Administrador</option>
-                  </select>
-                </div>
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary" name="btnsave">Guardar</button>
-                </div>
-              </div> <!-- end section 4 columns -->
+            
+            <?php
+              if(isset($_POST['btnedit'])){
+                $select = $pdo->prepare("SELECT * FROM tbl_user WHERE userid=".$_POST['btnedit']);
+                $select->execute();
+                if($select){
+                  $row = $select->fetch(PDO::FETCH_OBJ);
+                  echo '
+                    <div class="col-sm-4 col-md-4 col-lg-4">   <!-- first section 4 columns -->
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Nombre y Apellido</label>
+                        <input type="hidden" class="form-control" value="'.$row->userid.'" placeholder="" name="txtid">
+                        <input type="text" class="form-control" value="'.$row->username.'" placeholder="Ingrese nombres y apellidos" name="txtname">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Correo Electrónico</label>
+                        <input type="email" class="form-control" value="'.$row->useremail.'" placeholder="Ingrese el correo electrónico" name="txtemail">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputPassword1">Contraseña</label>
+                        <input type="password" class="form-control" value="'.$row->password.'"  placeholder="Ingrese la contraseña" name="txtpassword">
+                      </div>
+                      <label>Role</label>
+                      <div class="form-group">
+                        <select class="custom-select form-control-border" name="selectrole">
+                          <option selected>'.$row->role.'</option>
+                          <option>Usuario</option>
+                          <option>Administrador</option>
+                        </select>
+                      </div>
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-warning" name="btnupdate">Actualizar</button>
+                      </div>
+                    </div> <!-- end section 4 columns -->
+                  ';
+                }
+              }else{
+                echo '
+                  <div class="col-sm-4 col-md-4 col-lg-4">   <!-- first section 4 columns -->
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Nombre y Apellido</label>
+                      <input type="text" class="form-control" placeholder="Ingrese nombres y apellidos" name="txtname">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Correo Electrónico</label>
+                      <input type="email" class="form-control" placeholder="Ingrese el correo electrónico" name="txtemail">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Contraseña</label>
+                      <input type="password" class="form-control"  placeholder="Ingrese la contraseña" name="txtpassword">
+                    </div>
+                    <label>Role</label>
+                    <div class="form-group">
+                      <select class="custom-select form-control-border" name="selectrole">
+                        <option value="" disabled selected>Seleccione un role</option>
+                        <option>Usuario</option>
+                        <option>Administrador</option>
+                      </select>
+                    </div>
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary" name="btnsave">Guardar</button>
+                    </div>
+                  </div> <!-- end section 4 columns -->
+                ';
+              }
+            ?>
+
 
               <div class="col-sm-8 col-md-8 col-lg-8">  <!-- second section 8 columns  --> 
 
@@ -200,7 +348,7 @@
                                 <td>'.$row->password.'</td>
                                 <td>'.$row->role.'</td>
                                 <td>
-                                  <a href="uregistration.php?id='.$row->userid.'" class="btn btn-block btn-info btn-xs" role="button" name="btndelete">Editar</a>
+                                  <button type="submit" value="'.$row->userid.'" class="btn btn-block btn-success btn-xs" name="btnedit">Edit</button>
                                 </td>
                                 <td>
                                 <a href="uregistration.php?id='.$row->userid.'" class="btn btn-block btn-danger btn-xs" role="button" name="btndelete">Eliminar</a>
