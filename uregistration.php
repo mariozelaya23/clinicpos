@@ -299,7 +299,7 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
+                    <table id="tableusuers" class="table table-hover text-nowrap">
                       <thead>
                         <tr>
                           <th>#</th>
@@ -356,6 +356,13 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+<!-- Call this single function -->
+<script>
+  $(document).ready( function () {
+  $('#tableusuers').DataTable();
+  } );
+</script>
 
 <?php
   include_once 'footer.php';
