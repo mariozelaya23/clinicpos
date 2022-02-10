@@ -147,66 +147,43 @@
     }
 
     if(!isset($errorupdate)){
-      //this condition will prevent to insert the same email
-      if(isset($_POST['txtemail'])){
-        $select = $pdo->prepare("SELECT useremail FROM tbl_user WHERE useremail='$useremail'");
-        $select->execute();
+      //using of select query we update the database
+      $insert = $pdo->prepare("UPDATE tbl_user SET username=:name,useremail=:email,password=:pass,role=:role WHERE userid=".$userid);  // insert query
 
-        if($select->rowCount() > 0){  //if rowcount is greater that 0 that means that the useremail already exist
-          echo '<script type="text/javascript">
-          jQuery(function validation(){
+      $insert->bindParam(':name',$username); //passing values from placeholders into the variables
+      $insert->bindParam(':email',$useremail);
+      $insert->bindParam(':pass',$password);
+      $insert->bindParam(':role',$userrole);
+
+
+      if($insert->execute()){
+        echo '<script type="text/javascript">
+        jQuery(function validation(){
     
-            swal({
-              title: "Error!",
-              text: "¡El correo ingresado ya existe, favor ingresar otro!",
-              icon: "error",
-              button: "Ok",
-            });
+          swal({
+            title: "Muy bien",
+            text: "EL usuario se a guardado correctamente",
+            icon: "success",
+            button: "Ok",
+          });
     
-          })
-          </script>';
-        }else{
-          //2- using of select query we insert into the database
-          $insert = $pdo->prepare("UPDATE tbl_user SET username=:name,useremail=:email,password=:pass,role=:role WHERE userid=".$userid);  // insert query
+        })
+        </script>';
+      }else{
+        echo '<script type="text/javascript">
+        jQuery(function validation(){
 
-          $insert->bindParam(':name',$username); //passing values from placeholders into the variables
-          $insert->bindParam(':email',$useremail);
-          $insert->bindParam(':pass',$password);
-          $insert->bindParam(':role',$userrole);
+          swal({
+            title: "Error!",
+            text: "No se pudo registrar el usuario!",
+            icon: "error",
+            button: "Ok",
+          });
 
-
-          if($insert->execute()){
-            echo '<script type="text/javascript">
-            jQuery(function validation(){
-        
-              swal({
-                title: "Muy bien",
-                text: "EL usuario se a guardado correctamente",
-                icon: "success",
-                button: "Ok",
-              });
-        
-            })
-            </script>';
-          }else{
-            echo '<script type="text/javascript">
-            jQuery(function validation(){
-
-              swal({
-                title: "Error!",
-                text: "No se pudo registrar el usuario!",
-                icon: "error",
-                button: "Ok",
-              });
-
-            })
-            </script>';
-          }
-        }
+        })
+        </script>';
       }
-    }    
-
-
+    }       
 
   }//***********UPDATE BUTTON ENDS HERE ***********/
 
@@ -273,7 +250,7 @@
                         <select class="custom-select form-control-border" name="selectrole">
                           <option selected>'.$row->role.'</option>
                           <option>Usuario</option>
-                          <option>Administrador</option>
+                          <option>Admin</option>
                         </select>
                       </div>
                       <div class="card-footer">
@@ -302,7 +279,7 @@
                       <select class="custom-select form-control-border" name="selectrole">
                         <option value="" disabled selected>Seleccione un role</option>
                         <option>Usuario</option>
-                        <option>Administrador</option>
+                        <option>Admin</option>
                       </select>
                     </div>
                     <div class="card-footer">
