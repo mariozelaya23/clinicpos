@@ -115,7 +115,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
               <li class="breadcrumb-item active">Actualizar contraseña</li>
             </ol>
           </div>
@@ -126,7 +126,7 @@
     <!-- Main content -->
     <section class="content">
     
-      <div class="card card-primary">
+      <div class="card card-warning">
         <div class="card-header">
           <h3 class="card-title">Formulario para la actualización de contraseña</h3>
         </div>
@@ -153,7 +153,7 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer">
-            <button type="submit" class="btn btn-primary" name="btn_update">Actualizar</button>
+            <button type="submit" class="btn btn-warning" name="btn_update">Actualizar</button>
           </div>
         </form>
       </div>
