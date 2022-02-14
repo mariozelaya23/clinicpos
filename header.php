@@ -150,13 +150,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-hospital-user"></i>
               <p>
                 Pacientes
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./addpatient.php" class="nav-link">
+                <i class="fas fa-folder-plus nav-icon"></i>
+                  <p>Agregar Paciente</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./patientlist.php" class="nav-link">
+                  <i class="fas fa-list-alt nav-icon"></i>
+                  <p>Lista de Pacientes</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="uregistration.php" class="nav-link">

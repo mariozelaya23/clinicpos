@@ -325,7 +325,7 @@
                                 <td>'.$row->password.'</td>
                                 <td>'.$row->role.'</td>
                                 <td>
-                                  <button type="submit" value="'.$row->userid.'" class="btn btn-block btn-success btn-xs" name="btnedit">Edit</button>
+                                  <button type="submit" value="'.$row->userid.'" class="btn btn-block btn-success btn-xs" name="btnedit">Editar</button>
                                 </td>
                                 <td>
                                 <a href="uregistration.php?id='.$row->userid.'" class="btn btn-block btn-danger btn-xs" role="button" name="btndelete">Eliminar</a>
