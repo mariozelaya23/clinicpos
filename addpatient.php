@@ -122,7 +122,6 @@
                 <div class="form-group">
                   <label>Fecha de nacimiento:</label>
                     <input type="date" class="form-control" data-date-inline-picker="true"  name="txt_fnac" />
-                    </div>
                 </div>
               </div> <!-- end second section 6 columns -->
             </div>
