@@ -38,7 +38,7 @@
       
       <div class="card card-info">
         <div class="card-header">
-          <h3 class="card-title">Formulario para agregar nuevo paciente</h3>
+          <h3 class="card-title"><a href="patientlist.php" class="btn btn-primary" role="button">Lista de pacientes</a></h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -72,12 +72,8 @@
                   <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el número de teléfono" name="txt_telefono" required>
                 </div>
                 <div class="form-group">
-                  <label>Date:</label>
-                    <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                        <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
+                  <label>Fecha de nacimiento:</label>
+                    <input type="date" class="form-control" data-date-inline-picker="true"  name="txt_fnac"/>
                     </div>
                 </div>
               </div> <!-- end second section 6 columns -->
@@ -93,14 +89,6 @@
   </div>
   <!-- /.content-wrapper -->
 
-<script>
-  $(function () {
-    //Date picker
-    $('#reservationdate').datetimepicker({
-        format: 'L'
-    });
-  })
-</script>
 
 <?php
   include_once 'footer.php';
