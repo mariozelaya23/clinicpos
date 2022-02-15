@@ -12,6 +12,54 @@
     include_once'headeruser.php';
   }
 
+  if(isset($_POST['btnadd'])){
+    $pnombre = $_POST['txt_nombre'];
+    $papellido = $_POST['txt_apellido'];
+    $pdomicilio = $_POST['txt_domicilio'];
+    $pemail = $_POST['txt_email'];
+    $pnumerotel = $_POST['txt_telefono'];
+    $pfnac	 = $_POST['txt_fnac'];
+
+    $insert = $pdo->prepare("INSERT INTO tbl_paciente(pnombre,papellido,pdomicilio,pemail,pnumerotel,pfnac) 
+    VALUES(:pnombre,:papellido,:pdomicilio,:pemail,:pnumerotel,:pfnac)");
+    
+    $insert->bindParam(':pnombre',$pnombre);
+    $insert->bindParam(':papellido',$papellido);
+    $insert->bindParam(':pdomicilio',$pdomicilio);
+    $insert->bindParam(':pemail',$pemail);
+    $insert->bindParam(':pnumerotel',$pnumerotel);
+    $insert->bindParam(':pfnac',$pfnac);
+
+    if($insert->execute()){
+      echo '<script type="text/javascript">
+      jQuery(function validation(){
+
+        swal({
+          title: "Paciente agreado",
+          text: "Paciente agreado exitosamente",
+          icon: "success",
+          button: "Ok",
+        });
+
+      })
+      </script>';
+    }else{
+      echo '<script type="text/javascript">
+      jQuery(function validation(){
+
+        swal({
+          title: "Error!",
+          text: "El paciente NO pudo ser agregado",
+          icon: "error",
+          button: "Ok",
+        });
+
+      })
+      </script>';
+    }
+  }
+
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -56,16 +104,16 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Domicilio</label>
-                  <textarea type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el domicilio" name="txt_domicilio" rows="2" required></textarea>
+                  <textarea type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el domicilio" name="txt_domicilio" rows="2"></textarea>
                 </div>
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-info" name="btnupdate">Agregar</button>
+                  <button type="submit" class="btn btn-info" name="btnadd">Agregar</button>
                 </div>
               </div> <!-- end first section 6 columns -->
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                 <div class="form-group">
                     <label for="exampleInputPassword1">Correo electrónico</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el correo electrónico" name="txt_telefono">
+                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el correo electrónico" name="txt_email">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Número de teléfono</label>
@@ -73,7 +121,7 @@
                 </div>
                 <div class="form-group">
                   <label>Fecha de nacimiento:</label>
-                    <input type="date" class="form-control" data-date-inline-picker="true"  name="txt_fnac"/>
+                    <input type="date" class="form-control" data-date-inline-picker="true"  name="txt_fnac" />
                     </div>
                 </div>
               </div> <!-- end second section 6 columns -->
