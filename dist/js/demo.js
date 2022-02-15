@@ -142,9 +142,11 @@
   $container.append($sidebar_collapsed_container)
 
   $(document).on('collapsed.lte.pushmenu', '[data-widget="pushmenu"]', function () {
+    console.log('close');
     $sidebar_collapsed_checkbox.prop('checked', true)
   })
   $(document).on('shown.lte.pushmenu', '[data-widget="pushmenu"]', function () {
+    console.log('accc');
     $sidebar_collapsed_checkbox.prop('checked', false)
   })
 

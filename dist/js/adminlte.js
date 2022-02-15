@@ -2022,19 +2022,19 @@
    */
 
 
-  $__default['default'](document).on('click', SELECTOR_TOGGLE_BUTTON$1, function (event) {
-    event.preventDefault();
-    var button = event.currentTarget;
+  // $__default['default'](document).on('click', SELECTOR_TOGGLE_BUTTON$1, function (event) {
+  //   event.preventDefault();
+  //   var button = event.currentTarget;
 
-    if ($__default['default'](button).data('widget') !== 'pushmenu') {
-      button = $__default['default'](button).closest(SELECTOR_TOGGLE_BUTTON$1);
-    }
+  //   if ($__default['default'](button).data('widget') !== 'pushmenu') {
+  //     button = $__default['default'](button).closest(SELECTOR_TOGGLE_BUTTON$1);
+  //   }
 
-    PushMenu._jQueryInterface.call($__default['default'](button), 'toggle');
-  });
-  $__default['default'](window).on('load', function () {
-    PushMenu._jQueryInterface.call($__default['default'](SELECTOR_TOGGLE_BUTTON$1));
-  });
+  //   PushMenu._jQueryInterface.call($__default['default'](button), 'toggle');
+  // });
+  // $__default['default'](window).on('load', function () {
+  //   PushMenu._jQueryInterface.call($__default['default'](SELECTOR_TOGGLE_BUTTON$1));
+  // });
   /**
    * jQuery API
    * ====================================================

@@ -5,7 +5,6 @@
   if($_SESSION['useremail']=="" OR $_SESSION['role']=="Usuario"){  //with this session variable changepassword.php wont open until you login
     header('location:index.php');
   }
-
   if($_SESSION['role']=="Admin"){
     include_once'header.php';
   }else{
@@ -299,7 +298,7 @@
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body table-responsive p-0">
-                    <table id="tableusuers" class="table table-hover text-nowrap">
+                    <table id="tableusuers" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th>#</th>
@@ -359,10 +358,28 @@
 
 <!-- Call this single function -->
 <script>
-  $(document).ready( function () {
-  $('#tableusuers').DataTable();
+  jQuery(document).ready( function ($) {
+    $('#tableusuers').DataTable();
   } );
 </script>
+
+<!-- <script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script> -->
 
 <?php
   include_once 'footer.php';
