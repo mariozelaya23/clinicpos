@@ -81,7 +81,7 @@
                               <a href="editpatient.php?id='.$row->pid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
                             </td>
                             <td>
-                            <a href="deletepatient.php?id='.$row->pid.'" class="btn btn-block btn-danger btn-xs" role="button" name="btnpdelete">Eliminar</a>
+                            <button id='.$row->pid.' class="btn btn-block btn-danger btn-xs btnpdelete" >Eliminar</button>
                           </td>
                           </tr>
                         ';
@@ -137,23 +137,48 @@
   } );
 </script>
 
-<!-- <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+<!-- DELETE BUTTON AJAX CODE -->
+<script>
+  $(document).ready(function(){
+    $('.btnpdelete').click(function(){
+      //alert('Test');
+
+      var tdh = $(this);
+      var id = $(this).attr("id");
+      //alert(id);
+      //sweet alert
+      swal({
+        title: "¿Está seguro de desea eliminar el paciente?",
+        text: "¡Una vez eliminado no se puede recuperar este registro!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) { //ajax code
+          $.ajax({
+            url:'deletepatient.php',
+            type:'POST',
+            data:{
+              pidd:id
+            },
+            success:function(data){
+              tdh.parents('tr').hide();
+            }
+          })
+          swal("¡El paciente ha sido eliminado exitosamente!", {
+            icon: "success",
+          });
+        } else {
+          swal("¡El paciente no fue eliminado");
+        }
+      });
+
     });
+  
   });
-</script> -->
+
+</script>
 
 <?php
   include_once 'footer.php';
