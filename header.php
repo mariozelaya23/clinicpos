@@ -131,6 +131,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-hospital-user"></i>
               <p>
+                Citas
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="fas fa-folder-plus nav-icon"></i>
+                  <p>Agregar Cita</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="fas fa-list-alt nav-icon"></i>
+                  <p>Ver Citas</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-hospital-user"></i>
+              <p>
                 Pacientes
                 <i class="fas fa-angle-left right"></i>
               </p>
@@ -151,8 +174,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
           <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-hospital-user"></i>
+              <p>
+                Systema
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="uregistration.php" class="nav-link">
+                  <i class="far fa-registered nav-icon"></i>
+                  <p>Registro de Usuarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="changepassword.php" class="nav-link">
+                  <i class="fas fa-unlock-alt nav-icon"></i>
+                  <p>Actualizar contraseña</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
             <a href="uregistration.php" class="nav-link">
-              <i class="nav-icon far fa-registered"></i>
+              <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
                 Registro de Usuarios
               </p>
@@ -165,7 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 Actualizar contraseña
               </p>
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a href="logout.php" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
