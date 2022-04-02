@@ -137,7 +137,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="addappointment.php" class="nav-link">
+                <a href="patient_list_appointment.php" class="nav-link">
                   <i class="fas fa-folder-plus nav-icon"></i>
                   <p>Agregar Cita</p>
                 </a>
