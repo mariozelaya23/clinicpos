@@ -73,7 +73,7 @@
                             <td>'.$row->pnumerotel.'</td>
                             <td>'.$row->pfnac.'</td>
                             <td>
-                              <a href="viewpatient.php?id='.$row->pid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Nueva Cita</a>
+                              <a href="addappointment.php?id='.$row->pid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpadd_appo">Nueva Cita</a>
                             </td>
                           </tr>
                         ';

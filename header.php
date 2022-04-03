@@ -129,7 +129,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-hospital-user"></i>
+              <i class="nav-icon fas fa-calendar-check"></i>
               <p>
                 Citas
                 <i class="fas fa-angle-left right"></i>
@@ -138,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="patient_list_appointment.php" class="nav-link">
-                  <i class="fas fa-folder-plus nav-icon"></i>
+                  <i class="far fa-calendar-plus nav-icon"></i>
                   <p>Agregar Cita</p>
                 </a>
               </li>
@@ -175,9 +175,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-hospital-user"></i>
+              <i class="nav-icon fas fa-user-cog"></i>
               <p>
-                Systema
+                Sistema
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>

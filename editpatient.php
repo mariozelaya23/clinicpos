@@ -12,7 +12,7 @@
     include_once'headeruser.php';
   }
 
-  // getting the product id from product list page as well the data from that page
+  // getting the patient id from patient list page as well the data from that page
   $id = $_GET['id'];
   $select = $pdo->prepare("SELECT * FROM tbl_paciente WHERE pid=$id");
   $select->execute();
