@@ -21,12 +21,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Lista de Pacientes</h1>
+            <h1>Lista de Citas</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Lista de Pacientes</li>
+              <li class="breadcrumb-item active">Citas</li>
             </ol>
           </div>
         </div>
@@ -50,11 +50,11 @@
                   <tr>
                     <th>#</th>
                     <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Domicilio</th>
-                    <th>Email</th>
-                    <th>Teléfono</th>
-                    <th>F. Nacimiento</th>
+                    <th>Apellido</th>           
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Estatus</th>
+                    <th>Propocito</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -62,26 +62,29 @@
                   </thead>
                   <tbody>
                     <?php
-                      $select = $pdo->prepare("SELECT * FROM tbl_paciente ORDER BY pid");
+                      $select = $pdo->prepare("SELECT c.citaid AS citaid, p.pnombre AS pnombre, p.papellido AS papellido, c.citafecha AS citafecha, c.citahora AS citahora, c.citastatus AS citastatus, c.citaproposito AS citaproposito 
+                                                FROM tbl_cita c
+                                                INNER JOIN tbl_paciente p
+                                                ON p.pid = c.pacienteid");
                       $select->execute();
                       while($row=$select->fetch(PDO::FETCH_OBJ)){
                         echo '
                           <tr>
-                            <td>'.$row->pid.'</td>
+                            <td>'.$row->citaid.'</td>
                             <td>'.$row->pnombre.'</td>
                             <td>'.$row->papellido.'</td>
-                            <td>'.$row->pdomicilio.'</td>
-                            <td>'.$row->pemail.'</td>
-                            <td>'.$row->pnumerotel.'</td>
-                            <td>'.$row->pfnac.'</td>
+                            <td>'.$row->citafecha.'</td>
+                            <td>'.$row->citahora.'</td>
+                            <td>'.$row->citastatus.'</td>
+                            <td>'.$row->citaproposito.'</td>
                             <td>
-                              <a href="viewpatient.php?id='.$row->pid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
+                              <a href="viewpatient.php?id='.$row->citaid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
                             </td>
                             <td>
-                              <a href="editpatient.php?id='.$row->pid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
+                              <a href="editpatient.php?id='.$row->citaid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
                             </td>
                             <td>
-                            <button id='.$row->pid.' class="btn btn-block btn-danger btn-xs btnpdelete" >Eliminar</button>
+                            <button id='.$row->citaid.' class="btn btn-block btn-danger btn-xs btnpdelete" >Eliminar</button>
                             </td>
                           </tr>
                         ';
@@ -131,8 +134,7 @@
 <script>
   jQuery(document).ready( function ($) {
     $('#example1').DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      "responsive": true, "lengthChange": false, "autoWidth": false
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   } );
 </script>
