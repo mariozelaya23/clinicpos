@@ -54,7 +54,7 @@
                     <th>Fecha</th>
                     <th>Hora</th>
                     <th>Estatus</th>
-                    <th>Propocito</th>
+                    <th>Proposito</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -93,13 +93,13 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                    <th>#</th>
+                  <th>#</th>
                     <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Domicilio</th>
-                    <th>Email</th>
-                    <th>Teléfono</th>
-                    <th>F. Nacimiento</th>
+                    <th>Apellido</th>           
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Estatus</th>
+                    <th>Proposito</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>

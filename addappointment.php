@@ -4,13 +4,14 @@
 
   if($_SESSION['useremail']=="" OR $_SESSION['role']=="User"){  //with this session variable changepassword.php wont open until you login
     header('location:index.php');
+    exit();
   }
 
-  if($_SESSION['role']=="Admin"){
-    include_once'header.php';
-  }else{
-    include_once'headeruser.php';
-  }
+  // if($_SESSION['role']=="Admin"){
+  //   include_once'header.php';
+  // }else{
+  //   include_once'headeruser.php';
+  // }
 
   // getting the patient id from patient list page as well the data from that page
   $id = $_GET['id'];
@@ -52,6 +53,8 @@
 
       })
       </script>';
+      header("location:appointment_list.php");
+      exit();
     }else{
       echo '<script type="text/javascript">
       jQuery(function validation(){
@@ -68,6 +71,13 @@
     }
 
   }
+
+  if($_SESSION['role']=="Admin"){
+    include_once'header.php';
+  }else{
+    include_once'headeruser.php';
+  }
+
 
   // if(isset($_POST['btnadd'])){
   //   $pnombre = $_POST['txt_nombre'];
