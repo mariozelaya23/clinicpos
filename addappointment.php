@@ -79,54 +79,6 @@
   }
 
 
-  // if(isset($_POST['btnadd'])){
-  //   $pnombre = $_POST['txt_nombre'];
-  //   $papellido = $_POST['txt_apellido'];
-  //   $pdomicilio = $_POST['txt_domicilio'];
-  //   $pemail = $_POST['txt_email'];
-  //   $pnumerotel = $_POST['txt_telefono'];
-  //   $pfnac	 = $_POST['txt_fnac'];
-
-  //   $insert = $pdo->prepare("INSERT INTO tbl_paciente(pnombre,papellido,pdomicilio,pemail,pnumerotel,pfnac) 
-  //   VALUES(:pnombre,:papellido,:pdomicilio,:pemail,:pnumerotel,:pfnac)");
-    
-  //   $insert->bindParam(':pnombre',$pnombre);
-  //   $insert->bindParam(':papellido',$papellido);
-  //   $insert->bindParam(':pdomicilio',$pdomicilio);
-  //   $insert->bindParam(':pemail',$pemail);
-  //   $insert->bindParam(':pnumerotel',$pnumerotel);
-  //   $insert->bindParam(':pfnac',$pfnac);
-
-  //   if($insert->execute()){
-  //     echo '<script type="text/javascript">
-  //     jQuery(function validation(){
-
-  //       swal({
-  //         title: "Paciente agreado",
-  //         text: "Paciente agreado exitosamente",
-  //         icon: "success",
-  //         button: "Ok",
-  //       });
-
-  //     })
-  //     </script>';
-  //   }else{
-  //     echo '<script type="text/javascript">
-  //     jQuery(function validation(){
-
-  //       swal({
-  //         title: "Error!",
-  //         text: "El paciente NO pudo ser agregado",
-  //         icon: "error",
-  //         button: "Ok",
-  //       });
-
-  //     })
-  //     </script>';
-  //   }
-  // }
-
-
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -153,7 +105,7 @@
       
       <div class="card card-info">
         <div class="card-header">
-          <h3 class="card-title"><a href="patientlist.php" class="btn btn-primary" role="button">Lista de citas</a></h3>
+          <h3 class="card-title"><a href="appointment_list.php" class="btn btn-primary" role="button">Lista de citas</a></h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -189,7 +141,7 @@
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Hora de cita</label>
-                  <input type="text" class="form-control" placeholder="Ingrese hora de la cita" name="txt_hora_cita" required>
+                  <input type="time" class="form-control" placeholder="Ingrese hora de la cita" name="txt_hora_cita" required>
                 </div>
               </div> <!-- end second section 6 columns -->
             </div>

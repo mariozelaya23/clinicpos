@@ -23,7 +23,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Generar Nueva Cita</h1>
+            <h1>Ver Cita</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -40,7 +40,7 @@
       
       <div class="card card-info">
         <div class="card-header">
-          <h3 class="card-title"><a href="patientlist.php" class="btn btn-primary" role="button">Lista de citas</a></h3>
+          <h3 class="card-title"><a href="appointment_list.php" class="btn btn-primary" role="button">Lista de citas</a></h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -49,7 +49,7 @@
             <div class="row">
               <?php 
                 $id = $_GET['id'];
-                $select = $pdo->prepare("SELECT c.citaid AS citaid, p.pnombre AS pnombre, p.papellido AS papellido, c.citafecha AS citafecha, c.citahora AS citahora, c.citastatus AS citastatus, c.citaproposito AS citaproposito 
+                $select = $pdo->prepare("SELECT c.citaid AS citaid, CONCAT(p.pnombre, ' ', p.papellido) AS nombrecompleto, c.citafecha AS citafecha, c.citahora AS citahora, c.citastatus AS citastatus, c.citaproposito AS citaproposito 
                                         FROM tbl_cita c
                                         INNER JOIN tbl_paciente p
                                         ON p.pid = c.pacienteid
@@ -60,12 +60,12 @@
                   <div class="col-sm-6 col-md-6 col-lg-6">   <!-- first section 6 columns -->
                   <div class="form-group">
                     <label>Nombre del Paciente</label>
-                    <input type="text" class="form-control" name="txt_nombre_apellido" value="'.$row->pnombre.''.$row->papellido.'">
+                    <input type="text" class="form-control" name="txt_nombre_apellido" value="'.$row->nombrecompleto.'" disabled>
                   </div>
                   <div class="form-group">
                     <label>Estado de Cita</label>
-                    <select class="custom-select form-control-border" name="selectestado">
-                      <option selected>No confirmada</option>
+                    <select class="custom-select form-control-border" name="selectestado" disabled>
+                      <option selected>'.$row->citastatus.'</option>
                       <option>Confirmada</option>
                       <option>Finalizada</option>
                       <option>Cancelada</option>
@@ -73,20 +73,18 @@
                   </div>
                   <div class="form-group">
                     <label>Propósito</label>
-                    <textarea type="text" class="form-control" placeholder="Ingrese el Propósito de la cita" name="txt_proposito" rows="2"></textarea>
+                    <textarea type="text" class="form-control" name="txt_proposito" rows="3" disabled>'.$row->citaproposito.'</textarea>
                   </div>
-                  <div class="card-footer">
-                    <button type="submit" class="btn btn-info" name="btnadd_app">Agregar</button>
-                  </div>
+
                 </div> <!-- end first section 6 columns -->
                 <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                   <div class="form-group">
                     <label>Fecha de cita:</label>
-                      <input type="date" class="form-control" data-date-inline-picker="true"  name="txt_fcita" required>
+                      <input type="date" class="form-control" name="txt_fcita" value="'.$row->citafecha.'" disabled>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputPassword1">Hora de cita</label>
-                    <input type="text" class="form-control" placeholder="Ingrese hora de la cita" name="txt_hora_cita" required>
+                    <label>Hora de cita</label>
+                    <input type="time" class="form-control" name="txt_hora_cita" value="'.$row->citahora.'" disabled>
                   </div>
                 </div> <!-- end second section 6 columns -->
                   ';
