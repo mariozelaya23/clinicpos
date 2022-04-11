@@ -81,7 +81,7 @@
                               <a href="viewappointment.php?id='.$row->citaid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
                             </td>
                             <td>
-                              <a href="editpatient.php?id='.$row->citaid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
+                              <a href="editappointment.php?id='.$row->citaid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
                             </td>
                             <td>
                             <button id='.$row->citaid.' class="btn btn-block btn-danger btn-xs btnpdelete" >Eliminar</button>
