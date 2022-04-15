@@ -29,12 +29,49 @@
 
 
   if(isset($_POST['btncupdate'])){
-    $nombrecompleto_txt = $_POST['txt_nombre_apellido'];
+    //$nombrecompleto_txt = $_POST['txt_nombre_apellido'];
     $citafecha_txt = $_POST['txt_fcita'];
     $citahora_txt = $_POST['txt_hora_cita'];
-    $citastatuso_txt = $_POST['txt_nombre_apellido'];
+    $citastatuso_txt = $_POST['selectestado'];
+    $citaproposito_txt = $_POST['txt_proposito'];
+
+    $update = $pdo->prepare("UPDATE tbl_cita SET citafecha=:citafecha, citahora=:citahora, citastatus=:citastatus, 
+                            citaproposito=:citaproposito WHERE citaid=$id");
     
-  }else{
+    $update->bindParam(':citafecha', $citafecha_txt);
+    $update->bindParam(':citahora',$citahora_txt);
+    $update->bindParam(':citastatus',$citastatuso_txt);
+    $update->bindParam(':citaproposito',$citaproposito_txt);
+
+    if($update->execute()){
+      echo '<script type="text/javascript">
+      jQuery(function validation(){
+
+        swal({
+          title: "Datos actualizados",
+          text: "Datos de la cita actualizado exitosamente",
+          icon: "success",
+          button: "Ok",
+        });
+
+      })
+      </script>';
+      header("location:appointment_list.php");
+      exit();
+    }else{
+      echo '<script type="text/javascript">
+      jQuery(function validation(){
+  
+        swal({
+          title: "Error!",
+          text: "Los datos de la cita NO pudieron ser actualizados",
+          icon: "error",
+          button: "Ok",
+        });
+  
+      })
+      </script>';
+    }
 
   }
 

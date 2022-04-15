@@ -65,7 +65,8 @@
                       $select = $pdo->prepare("SELECT c.citaid AS citaid, p.pnombre AS pnombre, p.papellido AS papellido, c.citafecha AS citafecha, c.citahora AS citahora, c.citastatus AS citastatus, c.citaproposito AS citaproposito 
                                                 FROM tbl_cita c
                                                 INNER JOIN tbl_paciente p
-                                                ON p.pid = c.pacienteid");
+                                                ON p.pid = c.pacienteid
+                                                ORDER BY citafecha DESC");
                       $select->execute();
                       while($row=$select->fetch(PDO::FETCH_OBJ)){
                         echo '
