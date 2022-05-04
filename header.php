@@ -175,6 +175,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-solid fa-calendar-check"></i>
+              <p>
+                Checkin
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="checkin_list_patient.php" class="nav-link">
+                  <i class="fas fa-solid fa-check"></i>
+                  <p>Agregar Checkin</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="checkin_list.php" class="nav-link">
+                  <i class="fas fa-solid fa-check-double"></i>
+                  <p>Lista de Checkin</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-cog"></i>
               <p>
                 Sistema
