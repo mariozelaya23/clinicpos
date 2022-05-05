@@ -21,12 +21,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Lista de Citas</h1>
+            <h1>Lista de Checkins</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Citas</li>
+              <li class="breadcrumb-item active">Checkins</li>
             </ol>
           </div>
         </div>
@@ -49,12 +49,9 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>           
+                    <th>Nombre</th>         
                     <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Estatus</th>
-                    <th>Proposito</th>
+                    <th>Diagnostico</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -62,30 +59,30 @@
                   </thead>
                   <tbody>
                     <?php
-                      $select = $pdo->prepare("SELECT c.citaid AS citaid, p.pnombre AS pnombre, p.papellido AS papellido, c.citafecha AS citafecha, c.citahora AS citahora, c.citastatus AS citastatus, c.citaproposito AS citaproposito 
-                                                FROM tbl_cita c
+                      $select = $pdo->prepare("SELECT ch.checkid AS checkid, CONCAT(p.pnombre,' ',p.papellido) AS pnombre, 
+                                                ch.fecha AS fecha, ch.parterial AS parterial, ch.peso AS peso, 
+                                                ch.estatura AS estatura, ch.temperatura AS temperatura, ch.plan AS plan,
+                                                ch.diagnostico AS diagnostico, ch.IMC AS IMC, ch.razon AS razon 
+                                                FROM tbl_checkin ch
                                                 INNER JOIN tbl_paciente p
-                                                ON p.pid = c.pacienteid
-                                                ORDER BY citafecha DESC");
+                                                ON p.pid = ch.pacienteid
+                                                ORDER BY fecha DESC");
                       $select->execute();
                       while($row=$select->fetch(PDO::FETCH_OBJ)){
                         echo '
                           <tr>
-                            <td>'.$row->citaid.'</td>
+                            <td>'.$row->checkid.'</td>
                             <td>'.$row->pnombre.'</td>
-                            <td>'.$row->papellido.'</td>
-                            <td>'.$row->citafecha.'</td>
-                            <td>'.$row->citahora.'</td>
-                            <td>'.$row->citastatus.'</td>
-                            <td>'.$row->citaproposito.'</td>
+                            <td>'.$row->fecha.'</td>
+                            <td>'.$row->diagnostico.'</td>
                             <td>
-                              <a href="viewappointment.php?id='.$row->citaid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
+                              <a href="viewappointment.php?id='.$row->checkid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
                             </td>
                             <td>
-                              <a href="editappointment.php?id='.$row->citaid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
+                              <a href="editappointment.php?id='.$row->checkid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
                             </td>
                             <td>
-                            <button id='.$row->citaid.' class="btn btn-block btn-danger btn-xs btnpdelete" >Eliminar</button>
+                            <button id='.$row->checkid.' class="btn btn-block btn-danger btn-xs btnpdelete" >Eliminar</button>
                             </td>
                           </tr>
                         ';
@@ -94,13 +91,10 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                  <th>#</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>           
+                    <th>#</th>
+                    <th>Nombre</th>         
                     <th>Fecha</th>
-                    <th>Hora</th>
-                    <th>Estatus</th>
-                    <th>Proposito</th>
+                    <th>Diagnostico</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
