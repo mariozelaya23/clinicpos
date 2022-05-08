@@ -115,33 +115,48 @@
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- first section 6 columns -->
                 <div class="form-group">
                   <label>Nombre del Paciente</label>
-                  <input type="text" class="form-control" name="txt_nombre_apellido" value="<?php echo $pnombre_db.' '.$papellido_db;?>" required>
+                  <input type="text" class="form-control" name="txt_nombre_apellido" value="<?php echo $pnombre_db.' '.$papellido_db;?>" required disabled>
                 </div>
                 <div class="form-group">
-                  <label>Estado de Cita</label>
-                  <select class="custom-select form-control-border" name="selectestado">
-                    <option selected>No confirmada</option>
-                    <option>Confirmada</option>
-                    <option>Finalizada</option>
-                    <option>Cancelada</option>
-                  </select>
+                    <label>Precion Arterial</label>
+                    <input type="text" class="form-control" name="txt_parterial">
                 </div>
                 <div class="form-group">
-                  <label>Propósito</label>
-                  <textarea type="text" class="form-control" placeholder="Ingrese el Propósito de la cita" name="txt_proposito" rows="2"></textarea>
+                  <label>Peso</label>
+                  <input type="text" class="form-control" name="txt_peso">
                 </div>
+                <div class="form-group">
+                  <label>Estatura</label>
+                  <input type="text" class="form-control" name="txt_estatura">
+                </div>
+                <div class="form-group">
+                  <label>Plan</label>
+                  <textarea type="text" class="form-control" name="txt_plan" rows="7"></textarea>
+                </div> 
                 <div class="card-footer">
                   <button type="submit" class="btn btn-info" name="btnadd_app">Agregar</button>
                 </div>
               </div> <!-- end first section 6 columns -->
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                 <div class="form-group">
-                  <label>Fecha de cita:</label>
-                    <input type="date" class="form-control" data-date-inline-picker="true"  name="txt_fcita" required>
+                  <label>Fecha del Checkin:</label>
+                    <input type="date" class="form-control" data-date-inline-picker="true"  name="txt_fecha" required>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Hora de cita</label>
-                  <input type="time" class="form-control" placeholder="Ingrese hora de la cita" name="txt_hora_cita" required>
+                  <label>Razon</label>
+                  <textarea type="text" class="form-control" name="txt_razon" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Temperatura</label>
+                  <input type="text" class="form-control" name="txt_temperatura">
+                </div>
+                <div class="form-group">
+                  <label>IMC</label>
+                  <input type="text" class="form-control" name="txt_imc">
+                </div>
+                <div class="form-group">
+                  <label>Diagnostico</label>
+                  <textarea type="text" class="form-control" name="txt_diagnostico" rows="6"></textarea>
                 </div>
               </div> <!-- end second section 6 columns -->
             </div>

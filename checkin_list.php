@@ -76,7 +76,7 @@
                             <td>'.$row->fecha.'</td>
                             <td>'.$row->diagnostico.'</td>
                             <td>
-                              <a href="viewappointment.php?id='.$row->checkid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
+                              <a href="viewcheckin.php?id='.$row->checkid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
                             </td>
                             <td>
                               <a href="editappointment.php?id='.$row->checkid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
