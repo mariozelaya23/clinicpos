@@ -23,12 +23,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Ver Cita</h1>
+            <h1>Ver Checkin</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Nueva Cita</li>
+              <li class="breadcrumb-item active">Ver Checkin</li>
             </ol>
           </div>
         </div>
@@ -40,7 +40,7 @@
       
       <div class="card card-info">
         <div class="card-header">
-          <h3 class="card-title"><a href="appointment_list.php" class="btn btn-primary" role="button">Lista de citas</a></h3>
+          <h3 class="card-title"><a href="checkin_list.php" class="btn btn-primary" role="button">Lista de Checkins</a></h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -86,7 +86,7 @@
                 <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                   <div class="form-group">
                     <label>Fecha del Checkin:</label>
-                      <input type="date" class="form-control" name="txt_fecha" value="'.$row->fecha.'" disabled>
+                      <input type="datetime" class="form-control" name="txt_fecha" value="'.$row->fecha.'" disabled>
                   </div>
                   <div class="form-group">
                     <label>Razon</label>
