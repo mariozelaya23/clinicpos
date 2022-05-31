@@ -51,10 +51,9 @@
                     <th>#</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Domicilio</th>
-                    <th>Email</th>
                     <th>Teléfono</th>
                     <th>F. Nacimiento</th>
+                    <th>F. Registro</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -70,10 +69,9 @@
                             <td>'.$row->pid.'</td>
                             <td>'.$row->pnombre.'</td>
                             <td>'.$row->papellido.'</td>
-                            <td>'.$row->pdomicilio.'</td>
-                            <td>'.$row->pemail.'</td>
                             <td>'.$row->pnumerotel.'</td>
                             <td>'.$row->pfnac.'</td>
+                            <td>'.$row->fechaCreg.'</td>
                             <td>
                               <a href="viewpatient.php?id='.$row->pid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
                             </td>
@@ -93,10 +91,9 @@
                     <th>#</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Domicilio</th>
-                    <th>Email</th>
                     <th>Teléfono</th>
                     <th>F. Nacimiento</th>
+                    <th>F. Registro</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
