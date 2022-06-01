@@ -6,10 +6,10 @@
     header('location:index.php');
   }
 
-  if($_SESSION['role']=="Admin"){
-    include_once'header.php';
-  }else{
-    include_once'headeruser.php';
+  try {
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  }catch (PDOException $e){
+    echo $e->getMessage();
   }
 
   if(isset($_POST['btnadd'])){
@@ -19,46 +19,73 @@
     $pemail = $_POST['txt_email'];
     $pnumerotel = $_POST['txt_telefono'];
     $pfnac	 = $_POST['txt_fnac'];
-
-    $insert = $pdo->prepare("INSERT INTO tbl_paciente(pnombre,papellido,pdomicilio,pemail,pnumerotel,pfnac) 
-    VALUES(:pnombre,:papellido,:pdomicilio,:pemail,:pnumerotel,:pfnac)");
     
-    $insert->bindParam(':pnombre',$pnombre);
-    $insert->bindParam(':papellido',$papellido);
-    $insert->bindParam(':pdomicilio',$pdomicilio);
-    $insert->bindParam(':pemail',$pemail);
-    $insert->bindParam(':pnumerotel',$pnumerotel);
-    $insert->bindParam(':pfnac',$pfnac);
+    try {
+      $insert = $pdo->prepare("INSERT INTO tbl_paciente(pnombre,papellido,pdomicilio,pemail,pnumerotel,pfnac) 
+      VALUES(:pnombre,:papellido,:pdomicilio,:pemail,:pnumerotel,:pfnac)");
 
-    if($insert->execute()){
-      echo '<script type="text/javascript">
-      jQuery(function validation(){
+      $insert->bindParam(':pnombre',$pnombre);
+      $insert->bindParam(':papellido',$papellido);
+      $insert->bindParam(':pdomicilio',$pdomicilio);
+      $insert->bindParam(':pemail',$pemail);
+      $insert->bindParam(':pnumerotel',$pnumerotel);
+      $insert->bindParam(':pfnac',$pfnac);
 
-        swal({
-          title: "Paciente agreado",
-          text: "Paciente agreado exitosamente",
-          icon: "success",
-          button: "Ok",
-        });
-
-      })
-      </script>';
-    }else{
-      echo '<script type="text/javascript">
-      jQuery(function validation(){
-
-        swal({
-          title: "Error!",
-          text: "El paciente NO pudo ser agregado",
-          icon: "error",
-          button: "Ok",
-        });
-
-      })
-      </script>';
+      if($insert->execute()){
+        echo '<script type="text/javascript">
+        jQuery(function validation(){
+  
+          swal({
+            title: "Paciente agreado",
+            text: "Paciente agreado exitosamente",
+            icon: "success",
+            button: "Ok",
+          });
+  
+        })
+        </script>';
+        header("location:patientlist.php");
+        exit();
+      }else{
+        echo '<script type="text/javascript">
+        jQuery(function validation(){
+  
+          swal({
+            title: "Error!",
+            text: "El paciente NO pudo ser agregado",
+            icon: "error",
+            button: "Ok",
+          });
+  
+        })
+        </script>';
+      }
+    }catch (PDOException $e) {
+      if($e->getCode() == 23000){
+        //echo "Numero de Telefono y Fecha de Nacimiento ya existen.  Intente colocar diferentes datos";
+        echo '<script type="text/javascript">
+        jQuery(function validation(){
+  
+          swal({
+            title: "Error!",
+            text: "Telefono y Fecha de Nacimiento ya existen.  Intente colocar diferentes datos",
+            icon: "error",
+            button: "Ok",
+          });
+  
+        })
+        </script>';
+      } else{
+        echo $e->getMessage();
+      }
     }
   }
 
+  if($_SESSION['role']=="Admin"){
+    include_once'header.php';
+  }else{
+    include_once'headeruser.php';
+  }
 
 ?>
 
@@ -95,16 +122,16 @@
             <div class="row">
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- first section 6 columns -->
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Nombre</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el nombre" name="txt_nombre" required>
+                  <label for="">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre" name="txt_nombre" required>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Apellido</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el apellido" name="txt_apellido" required>
+                  <label for="">Apellido</label>
+                  <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido" name="txt_apellido" required>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Domicilio</label>
-                  <textarea type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el domicilio" name="txt_domicilio" rows="2"></textarea>
+                  <label for="">Domicilio</label>
+                  <textarea type="text" class="form-control" id="domicilio" placeholder="Ingrese el domicilio" name="txt_domicilio" rows="2"></textarea>
                 </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-info" name="btnadd">Agregar</button>
@@ -112,16 +139,16 @@
               </div> <!-- end first section 6 columns -->
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Correo electrónico</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el correo electrónico" name="txt_email">
+                    <label for="">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" placeholder="Ingrese el correo electrónico" name="txt_email">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Número de teléfono</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el número de teléfono" name="txt_telefono" required>
+                  <label for="">Número de teléfono</label>
+                  <input type="tel" class="form-control" id="telefono" pattern="[0-9]{8}" placeholder="8 digitos --------" name="txt_telefono" required>
                 </div>
                 <div class="form-group">
                   <label>Fecha de nacimiento:</label>
-                    <input type="date" class="form-control" data-date-inline-picker="true"  name="txt_fnac" />
+                    <input type="date" class="form-control" id="DOB" data-date-inline-picker="true"  name="txt_fnac" />
                 </div>
               </div> <!-- end second section 6 columns -->
             </div>

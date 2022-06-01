@@ -6,12 +6,6 @@
     header('location:index.php');
   }
 
-  if($_SESSION['role']=="Admin"){
-    include_once'header.php';
-  }else{
-    include_once'headeruser.php';
-  }
-
   // getting the patient id from patient list page as well the data from that page
   $id = $_GET['id'];
   $select = $pdo->prepare("SELECT * FROM tbl_paciente WHERE pid=$id");
@@ -58,6 +52,8 @@
 
       })
       </script>';
+      header("location:patientlist.php");
+      exit();
     }else{
       echo '<script type="text/javascript">
       jQuery(function validation(){
@@ -87,6 +83,12 @@
   $pnumerotel_db = $row['pnumerotel'];
   $pfnac_db = $row['pfnac'];
 
+  if($_SESSION['role']=="Admin"){
+    include_once'header.php';
+  }else{
+    include_once'headeruser.php';
+  }
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -101,7 +103,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Agregar Paciente</li>
+              <li class="breadcrumb-item active">Modificar Paciente</li>
             </ol>
           </div>
         </div>
@@ -122,16 +124,16 @@
             <div class="row">
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- first section 6 columns -->
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Nombre</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el nombre" name="txt_nombre" value="<?php echo $pnombe_db;?>" required>
+                  <label for="">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre" name="txt_nombre" value="<?php echo $pnombe_db;?>" required>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Apellido</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el apellido" name="txt_apellido" value="<?php echo $papellido_db;?>" required>
+                  <label for="">Apellido</label>
+                  <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido" name="txt_apellido" value="<?php echo $papellido_db;?>" required>
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Domicilio</label>
-                  <textarea type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el domicilio" name="txt_domicilio" rows="2"><?php echo $pdomicilio_db;?></textarea>
+                  <label for="">Domicilio</label>
+                  <textarea type="text" class="form-control" id="domicilio" placeholder="Ingrese el domicilio" name="txt_domicilio" rows="2"><?php echo $pdomicilio_db;?></textarea>
                 </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-info" name="btnpupdate">Actualizar</button>
@@ -139,16 +141,16 @@
               </div> <!-- end first section 6 columns -->
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Correo electrónico</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el correo electrónico" name="txt_email" value="<?php echo $pemail_db;?>">
+                    <label for="">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email"  placeholder="Ingrese el correo electrónico" name="txt_email" value="<?php echo $pemail_db;?>">
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Número de teléfono</label>
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Ingrese el número de teléfono" name="txt_telefono" value="<?php echo $pnumerotel_db;?>" required>
+                  <label for="">Número de teléfono</label>
+                  <input type="tel" class="form-control" id="telefono" pattern="[0-9]{8}" placeholder="8 digitos --------" name="txt_telefono" value="<?php echo $pnumerotel_db;?>" required>
                 </div>
                 <div class="form-group">
                   <label>Fecha de nacimiento:</label>
-                    <input type="date" class="form-control" data-date-inline-picker="true"  name="txt_fnac" value="<?php echo $pfnac_db;?>"/>
+                    <input type="date" class="form-control" id="DOB" data-date-inline-picker="true"  name="txt_fnac" value="<?php echo $pfnac_db;?>"/>
                 </div>
               </div> <!-- end second section 6 columns -->
             </div>
