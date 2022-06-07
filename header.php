@@ -127,7 +127,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-calendar-check"></i>
               <p>
@@ -149,7 +149,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
             </ul>
-          </li>
+          </li>-->
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-hospital-user"></i>
@@ -173,7 +173,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-solid fa-calendar-check"></i>
               <p>
@@ -195,7 +195,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
             </ul>
-          </li>
+          </li>-->
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-cog"></i>
