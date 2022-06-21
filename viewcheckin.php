@@ -66,8 +66,8 @@
                     <input type="text" class="form-control" name="txt_nombre_apellido" value="'.$row->pnombre.'" disabled>
                   </div>
                   <div class="form-group">
-                    <label>Precion Arterial</label>
-                    <input type="text" class="form-control" name="txt_parterial" value="'.$row->parterial.'" disabled>
+                    <label>Razon</label>
+                    <textarea type="text" class="form-control" name="txt_razon" rows="2" disabled>'.$row->razon.'</textarea>
                   </div>
                   <div class="form-group">
                     <label>Peso</label>
@@ -89,8 +89,8 @@
                       <input type="datetime" class="form-control" name="txt_fecha" value="'.$row->fecha.'" disabled>
                   </div>
                   <div class="form-group">
-                    <label>Razon</label>
-                    <textarea type="text" class="form-control" name="txt_razon" rows="2" disabled>'.$row->razon.'</textarea>
+                    <label>Precion Arterial</label>
+                    <input type="text" class="form-control" name="txt_parterial" value="'.$row->parterial.'" disabled>
                   </div>
                   <div class="form-group">
                     <label>Temperatura</label>
