@@ -29,15 +29,18 @@
     $fecha = $_POST['txt_fecha'];
     $razon = $_POST['txt_razon'];
     $parterial = $_POST['txt_parterial'];
+    $pulso = $_POST['txt_pulso'];
+    $frec_res = $_POST['txt_frec_resp'];
     $peso = $_POST['txt_peso'];
     $estatura = $_POST['txt_estatura'];
+    $sato2 = $_POST['txt_sato2'];
     $temperatura = $_POST['txt_temperatura'];
     $plan = $_POST['txt_plan'];
     $diagnostico = $_POST['txt_diagnostico'];
     $IMC = $_POST['txt_imc'];
 
-    $insert = $pdo->prepare("INSERT INTO tbl_checkin(fecha,razon,parterial,peso,estatura,temperatura,plan,diagnostico,IMC,pacienteid)
-    VALUES(:fecha,:razon,:parterial,:peso,:estatura,:temperatura,:plan,:diagnostico,:IMC,:pacienteid)");
+    $insert = $pdo->prepare("INSERT INTO tbl_checkin(fecha,razon,parterial,peso,estatura,temperatura,plan,diagnostico,IMC,pacienteid,pulso,frec_res,sato2)
+    VALUES(:fecha,:razon,:parterial,:peso,:estatura,:temperatura,:plan,:diagnostico,:IMC,:pacienteid,:pulso,:frec_res,:sato2)");
 
     $insert->bindParam(':fecha',$fecha);
     $insert->bindParam(':razon',$razon);
@@ -49,6 +52,9 @@
     $insert->bindParam(':diagnostico',$diagnostico);
     $insert->bindParam(':IMC',$IMC);
     $insert->bindParam(':pacienteid',$id_db);
+    $insert->bindParam(':pulso',$pulso);
+    $insert->bindParam(':frec_res',$frec_res);
+    $insert->bindParam(':sato2',$sato2);
 
     if($insert->execute()){
       echo '<script type="text/javascript">
