@@ -52,7 +52,8 @@
                 $select = $pdo->prepare("SELECT ch.checkid AS checkid, CONCAT(p.pnombre,' ',p.papellido) AS pnombre, 
                                         ch.fecha AS fecha, ch.parterial AS parterial, ch.peso AS peso, 
                                         ch.estatura AS estatura, ch.temperatura AS temperatura, ch.plan AS plan,
-                                        ch.diagnostico AS diagnostico, ch.IMC AS IMC, ch.razon AS razon 
+                                        ch.diagnostico AS diagnostico, ch.IMC AS IMC, ch.razon AS razon, ch.pulso AS pulso,
+                                        ch.frec_res AS frec_res, ch.sato2 AS sato2
                                         FROM tbl_checkin ch
                                         INNER JOIN tbl_paciente p
                                         ON p.pid = ch.pacienteid
@@ -61,50 +62,69 @@
                 while($row=$select->fetch(PDO::FETCH_OBJ)){
                   echo '
                   <div class="col-sm-6 col-md-6 col-lg-6">   <!-- first section 6 columns -->
-                  <div class="form-group">
-                    <label>Nombre del Paciente</label>
-                    <input type="text" class="form-control" name="txt_nombre_apellido" value="'.$row->pnombre.'" disabled>
+                    <div class="form-group">
+                      <label>Nombre del Paciente</label>
+                      <input type="text" class="form-control" name="txt_nombre_apellido" value="'.$row->pnombre.'" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>Razon</label>
+                      <textarea type="text" class="form-control" name="txt_razon" rows="2" disabled>'.$row->razon.'</textarea>
+                    </div>
+                  </div> <!-- end first section 6 columns -->
+                  <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
+                    <div class="form-group">
+                      <label>Fecha del Checkin:</label>
+                        <input type="datetime-local" class="form-control" name="txt_fecha" value="'.$row->fecha.'" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>Historia</label>
+                      <textarea type="text" class="form-control" name="txt_historia" rows="2" disabled></textarea>
+                    </div>
+                  </div> <!-- end second section 6 columns -->
+                  <div class="col-sm-6 col-md-6 col-lg-6">   <!-- first section 6 columns -->
+                    <div class="form-group">
+                      <label>Precion Arterial</label>
+                      <input type="text" class="form-control" name="txt_parterial" value="'.$row->parterial.'" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>Frecuencia Respiratoria</label>
+                      <input type="text" class="form-control" name="txt_frec_resp" value="'.$row->frec_res.'" disabled>
+                    </div>
+                    <div class="form-group">
+                    <label>Saturacion O2</label>
+                      <input type="text" class="form-control" name="txt_sato2" value="'.$row->sato2.'" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>Estatura</label>
+                      <input type="text" class="form-control" name="txt_estatura" value="'.$row->estatura.'" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>Impresion Diagnostica</label>
+                      <textarea type="text" class="form-control" name="txt_diagnostico" rows="6" disabled>'.$row->diagnostico.'</textarea>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label>Razon</label>
-                    <textarea type="text" class="form-control" name="txt_razon" rows="2" disabled>'.$row->razon.'</textarea>
-                  </div>
-                  <div class="form-group">
-                    <label>Peso</label>
-                    <input type="text" class="form-control" name="txt_peso" value="'.$row->peso.'" disabled>
-                  </div>
-                  <div class="form-group">
-                    <label>Estatura</label>
-                    <input type="text" class="form-control" name="txt_estatura" value="'.$row->estatura.'" disabled>
-                  </div>
-                  <div class="form-group">
-                    <label>Plan</label>
-                    <textarea type="text" class="form-control" name="txt_plan" rows="7" disabled>'.$row->plan.'</textarea>
-                  </div>
-
-                </div> <!-- end first section 6 columns -->
-                <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
-                  <div class="form-group">
-                    <label>Fecha del Checkin:</label>
-                      <input type="datetime" class="form-control" name="txt_fecha" value="'.$row->fecha.'" disabled>
-                  </div>
-                  <div class="form-group">
-                    <label>Precion Arterial</label>
-                    <input type="text" class="form-control" name="txt_parterial" value="'.$row->parterial.'" disabled>
-                  </div>
-                  <div class="form-group">
-                    <label>Temperatura</label>
-                    <input type="text" class="form-control" name="txt_temperatura" value="'.$row->temperatura.'" disabled>
-                  </div>
-                  <div class="form-group">
-                    <label>IMC</label>
-                    <input type="text" class="form-control" name="txt_imc" value="'.$row->IMC.'" disabled>
-                  </div>
-                  <div class="form-group">
-                    <label>Diagnostico</label>
-                    <textarea type="text" class="form-control" name="txt_diagnostico" rows="6" disabled>'.$row->diagnostico.'</textarea>
-                  </div>
-                </div> <!-- end second section 6 columns -->
+                  <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
+                    <div class="form-group">
+                      <label>Pulso</label>
+                      <input type="text" class="form-control" name="txt_pulso" value="'.$row->pulso.'" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>Temperatura</label>
+                      <input type="text" class="form-control" name="txt_temperatura" value="'.$row->temperatura.'" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>Peso</label>
+                      <input type="text" class="form-control" name="txt_peso" value="'.$row->peso.'" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>IMC</label>
+                      <input type="text" class="form-control" name="txt_imc" value="'.$row->IMC.'" disabled>
+                    </div>
+                    <div class="form-group">
+                      <label>Plan</label>
+                      <textarea type="text" class="form-control" name="txt_plan" rows="6" disabled>'.$row->plan.'</textarea>
+                    </div> 
+                  </div> <!-- end second section 6 columns -->
                   ';
                 }
               
