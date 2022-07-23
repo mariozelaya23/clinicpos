@@ -133,28 +133,24 @@
                   <label>Nombre del Paciente</label>
                   <input type="text" class="form-control" name="txt_nombre_apellido" value="<?php echo $pnombre_db.' '.$papellido_db;?>" required disabled>
                 </div>
-                <div class="form-group">
-                  <label>Razon</label>
-                  <textarea type="text" class="form-control" name="txt_razon" rows="2"></textarea>
-                </div>
               </div> <!-- end first section 6 columns -->
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                 <div class="form-group">
                   <label>Fecha del Checkin:</label>
                     <input type="datetime-local" class="form-control" data-date-inline-picker="true"  name="txt_fecha" required>
                 </div>
-                <div class="form-group">
-                  <label>Historia</label>
-                  <textarea type="text" class="form-control" name="txt_historia" rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                  <button type="submit" class="btn btn-warning" name="btnedit_historia">Modificar Historia</button>
-                  <button type="submit" class="btn btn-warning" name="btnsave_histo">Guardar</button>
-                </div>
               </div> <!-- end second section 6 columns -->
             </div>
             <div class="row">
-              <div class="col-sm-6 col-md-6 col-lg-6">
+              <div class="col-sm-12 col-md-12 col-lg-12"> <!-- 12 columns section-->
+                <div class="form-group">
+                  <label>Razon</label>
+                  <textarea type="text" class="form-control" name="txt_razon" rows="2"></textarea>
+                </div>
+              </div> <!-- end 12 columns section-->
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-md-6 col-lg-6"> <!-- 6 columns section-->
                 <div class="form-group">
                   <label>Precion Arterial</label>
                   <input type="text" class="form-control" name="txt_parterial">
@@ -171,15 +167,8 @@
                   <label>Estatura</label>
                   <input type="text" class="form-control" name="txt_estatura">
                 </div>
-                <div class="form-group">
-                  <label>Impresion Diagnostica</label>
-                  <textarea type="text" class="form-control" name="txt_diagnostico" rows="6"></textarea>
-                </div>
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-info" name="btnadd_app">Agregar</button>
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-6 col-lg-6">
+              </div> <!-- end 6 columns section-->
+              <div class="col-sm-6 col-md-6 col-lg-6"> <!-- 6 columns section-->
                 <div class="form-group">
                   <label>Pulso</label>
                   <input type="text" class="form-control" name="txt_pulso">
@@ -196,10 +185,42 @@
                   <label>IMC</label>
                   <input type="text" class="form-control" name="txt_imc">
                 </div>
+              </div> <!-- end 6 columns section-->
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Impresion Diagnostica</label>
+                  <textarea type="text" class="form-control" name="txt_diagnostico" rows="6"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
                   <label>Plan</label>
                   <textarea type="text" class="form-control" name="txt_plan" rows="6"></textarea>
-                </div> 
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-info" name="btnadd_app">Agregar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- form start -->
+        <form role="form" action="" method="POST">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Historia</label>
+                  <textarea type="text" class="form-control" name="txt_historia" rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-warning" name="btnedit_historia">Modificar Historia</button>
+                  <button type="submit" class="btn btn-warning" name="btnsave_histo">Guardar</button>
+                </div>
               </div>
             </div>
           </div>
