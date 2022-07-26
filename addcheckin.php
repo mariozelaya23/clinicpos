@@ -16,12 +16,26 @@
   // getting the patient id from patient list page as well the data from that page
   $id = $_GET['id'];
   $select = $pdo->prepare("SELECT * FROM tbl_paciente WHERE pid=$id");
+
   $select->execute();
   $row = $select->fetch(PDO::FETCH_ASSOC);
 
   $id_db = $row['pid'];
   $pnombre_db = $row['pnombre'];
   $papellido_db = $row['papellido'];
+
+
+  $select = $pdo->prepare("SELECT historia FROM tbl_historia WHERE pacienteid=$id");
+  $select->execute();
+
+
+  $row = $select->fetch(PDO::FETCH_ASSOC);
+  if(empty($row)){
+    $historia_db = '';
+  } else {
+    $historia_db = $row['historia'];
+  }
+  
 
   //print_r($row);
 
@@ -215,7 +229,7 @@
               <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
                   <label>Historia</label>
-                  <textarea type="text" class="form-control" name="txt_historia" rows="6"></textarea>
+                  <textarea type="text" class="form-control" name="txt_historia" rows="6"><?php echo $historia_db;?></textarea>
                 </div>
                 <div class="form-group">
                   <button type="submit" class="btn btn-warning" name="btnedit_historia">Modificar Historia</button>
