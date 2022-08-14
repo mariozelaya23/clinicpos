@@ -55,8 +55,7 @@
                                         ch.diagnostico AS diagnostico, ch.IMC AS IMC, ch.razon AS razon, ch.pulso AS pulso,
                                         ch.frec_res AS frec_res, ch.sato2 AS sato2
                                         FROM tbl_checkin ch
-                                        INNER JOIN tbl_paciente p
-                                        ON p.pid = ch.pacienteid
+                                        INNER JOIN tbl_paciente p ON p.pid = ch.pacienteid
                                         WHERE ch.checkid=$id");
                 $select->execute();
                 while($row=$select->fetch(PDO::FETCH_OBJ)){
@@ -66,21 +65,19 @@
                       <label>Nombre del Paciente</label>
                       <input type="text" class="form-control" name="txt_nombre_apellido" value="'.$row->pnombre.'" disabled>
                     </div>
-                    <div class="form-group">
-                      <label>Razon</label>
-                      <textarea type="text" class="form-control" name="txt_razon" rows="2" disabled>'.$row->razon.'</textarea>
-                    </div>
                   </div> <!-- end first section 6 columns -->
                   <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                     <div class="form-group">
                       <label>Fecha del Checkin:</label>
-                        <input type="datetime-local" class="form-control" name="txt_fecha" value="'.$row->fecha.'" disabled>
-                    </div>
-                    <div class="form-group">
-                      <label>Historia</label>
-                      <textarea type="text" class="form-control" name="txt_historia" rows="2" disabled></textarea>
+                      <input type="datetime-local" class="form-control" name="txt_fecha" value="'.$row->fecha.'" disabled>
                     </div>
                   </div> <!-- end second section 6 columns -->
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label>Razon</label>
+                      <textarea type="text" class="form-control" name="txt_razon" rows="2" disabled>'.$row->razon.'</textarea>
+                    </div>
+                  </div>
                   <div class="col-sm-6 col-md-6 col-lg-6">   <!-- first section 6 columns -->
                     <div class="form-group">
                       <label>Precion Arterial</label>
@@ -98,17 +95,13 @@
                       <label>Estatura</label>
                       <input type="text" class="form-control" name="txt_estatura" value="'.$row->estatura.'" disabled>
                     </div>
-                    <div class="form-group">
-                      <label>Impresion Diagnostica</label>
-                      <textarea type="text" class="form-control" name="txt_diagnostico" rows="6" disabled>'.$row->diagnostico.'</textarea>
-                    </div>
                   </div>
                   <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                     <div class="form-group">
                       <label>Pulso</label>
                       <input type="text" class="form-control" name="txt_pulso" value="'.$row->pulso.'" disabled>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"> 
                       <label>Temperatura</label>
                       <input type="text" class="form-control" name="txt_temperatura" value="'.$row->temperatura.'" disabled>
                     </div>
@@ -120,16 +113,42 @@
                       <label>IMC</label>
                       <input type="text" class="form-control" name="txt_imc" value="'.$row->IMC.'" disabled>
                     </div>
+                  </div> <!-- end second section 6 columns -->
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="form-group">
+                      <label>Impresion Diagnostica</label>
+                      <textarea type="text" class="form-control" name="txt_diagnostico" rows="6" disabled>'.$row->diagnostico.'</textarea>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
                       <label>Plan</label>
                       <textarea type="text" class="form-control" name="txt_plan" rows="6" disabled>'.$row->plan.'</textarea>
                     </div> 
-                  </div> <!-- end second section 6 columns -->
+                  </div>
+
                   ';
                 }
-              
               ?>
-
+              <?php
+                $id = $_GET['id'];
+                $select = $pdo->prepare("SELECT h.historia AS historia
+                                        FROM tbl_checkin ch
+                                        JOIN tbl_paciente p ON p.pid = ch.pacienteid
+                                        JOIN tbl_historia h ON p.pid = h.pacienteid
+                                        WHERE ch.checkid=$id");
+                $select->execute();
+                while($row=$select->fetch(PDO::FETCH_OBJ)){
+                  echo '
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      <div class="form-group">
+                        <label>Historia</label>
+                        <textarea type="text" class="form-control" name="txt_historia" rows="6" disabled>'.$row->historia.'</textarea>
+                      </div>
+                    </div>
+                  ';
+                }
+              ?>
             </div>
           </div>
         </form>

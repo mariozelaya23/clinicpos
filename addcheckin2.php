@@ -222,6 +222,24 @@
             </div>
           </div>
         </form>
+        <!-- form start -->
+        <form role="form" action="" method="POST">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Historia</label>
+                  <textarea type="text" class="form-control" name="txt_historia" rows="6"><?php echo $historia_db;?></textarea>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-warning" name="btnedit_historia">Modificar Historia</button>
+                  <button type="submit" class="btn btn-warning" name="btnsave_histo">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- /.card-body -->
       </div>
 
 
