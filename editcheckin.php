@@ -6,75 +6,100 @@
     header('location:index.php');
     exit();
   }
+ 
 
-  // getting the appointment id from appointment list page as well the data from that page
+  // getting the checkin id from checkin list page as well the data from that page
   $id = $_GET['id'];
-  $select = $pdo->prepare("SELECT c.citaid AS citaid, CONCAT(p.pnombre, ' ', p.papellido) AS nombrecompleto, c.citafecha AS citafecha, 
-                          c.citahora AS citahora, c.citastatus AS citastatus, c.citaproposito AS citaproposito 
-                          FROM tbl_cita c
-                          INNER JOIN tbl_paciente p
-                          ON p.pid = c.pacienteid
-                          WHERE citaid=$id");
+  $select = $pdo->prepare("SELECT ch.checkid AS checkid, CONCAT(p.pnombre,' ',p.papellido) AS pnombre, 
+                          ch.fecha AS fecha, ch.parterial AS parterial, ch.peso AS peso, 
+                          ch.estatura AS estatura, ch.temperatura AS temperatura, ch.plan AS plan,
+                          ch.diagnostico AS diagnostico, ch.IMC AS IMC, ch.razon AS razon, ch.pulso AS pulso,
+                          ch.frec_res AS frec_res, ch.sato2 AS sato2
+                          FROM tbl_checkin ch
+                          INNER JOIN tbl_paciente p ON p.pid = ch.pacienteid
+                          WHERE ch.checkid=$id");
   $select->execute();
   $row = $select->fetch(PDO::FETCH_ASSOC);
 
-  $id_db = $row['citaid'];
-  $nombrecompleto_db = $row['nombrecompleto'];
-  $citafecha_db = $row['citafecha'];
-  $citahora_db = $row['citahora'];
-  $citastatus_db = $row['citastatus'];
-  $citaproposito_db = $row['citaproposito'];
+  $id_db = $row['checkid'];
+  $nombrecompleto_db = $row['pnombre'];
+  $citafecha_db = $row['fecha'];
+  $parterial_db = $row['parterial'];
+  $peso_db = $row['peso'];
+  $estatura_db = $row['estatura'];
+  $temperatura_db = $row['temperatura'];
+  $plan_db = $row['plan'];
+  $diagnostico_db = $row['diagnostico'];
+  $IMC_db = $row['IMC'];
+  $razon_db = $row['razon'];
+  $pulso_db = $row['pulso'];
+  $frec_res_db = $row['frec_res'];
+  $sato2_db = $row['sato2'];
 
   //print_r($row);
 
-
   if(isset($_POST['btncupdate'])){
-    //$nombrecompleto_txt = $_POST['txt_nombre_apellido'];
-    $citafecha_txt = $_POST['txt_fcita'];
-    $citahora_txt = $_POST['txt_hora_cita'];
-    $citastatuso_txt = $_POST['selectestado'];
-    $citaproposito_txt = $_POST['txt_proposito'];
+    $citafecha_txt = $_POST['txt_fecha'];
+    $parterial_txt = $_POST['txt_parterial'];
+    $peso_txt = $_POST['txt_peso'];
+    $estatura_txt = $_POST['txt_estatura'];
+    $temperatura_txt = $_POST['txt_temperatura'];
+    $plan_txt = $_POST['txt_plan'];
+    $diagnostico_txt = $_POST['txt_diagnostico'];
+    $IMC_txt = $_POST['txt_imc'];
+    $razon_txt = $_POST['txt_razon'];
+    $pulso_txt = $_POST['txt_pulso'];
+    $frec_res_txt = $_POST['txt_frec_resp'];
+    $sato2_txt = $_POST['txt_sato2'];
 
-    $update = $pdo->prepare("UPDATE tbl_cita SET citafecha=:citafecha, citahora=:citahora, citastatus=:citastatus, 
-                            citaproposito=:citaproposito WHERE citaid=$id");
-    
-    $update->bindParam(':citafecha', $citafecha_txt);
-    $update->bindParam(':citahora',$citahora_txt);
-    $update->bindParam(':citastatus',$citastatuso_txt);
-    $update->bindParam(':citaproposito',$citaproposito_txt);
+    $update = $pdo->prepare("INSERT INTO tbl_checkin(fecha,razon,parterial,peso,estatura,temperatura,plan,diagnostico,IMC,pacienteid,pulso,frec_res,sato2)
+    VALUES(:fecha,:razon,:parterial,:peso,:estatura,:temperatura,:plan,:diagnostico,:IMC,:pacienteid,:pulso,:frec_res,:sato2)");
 
-    if($update->execute()){
+    $insert->bindParam(':fecha',$fecha);
+    $insert->bindParam(':razon',$razon);
+    $insert->bindParam(':parterial',$parterial);
+    $insert->bindParam(':peso',$peso);
+    $insert->bindParam(':estatura',$estatura);
+    $insert->bindParam(':temperatura',$temperatura);
+    $insert->bindParam(':plan',$plan);
+    $insert->bindParam(':diagnostico',$diagnostico);
+    $insert->bindParam(':IMC',$IMC);
+    $insert->bindParam(':pacienteid',$id_db);
+    $insert->bindParam(':pulso',$pulso);
+    $insert->bindParam(':frec_res',$frec_res);
+    $insert->bindParam(':sato2',$sato2);
+
+    if($insert->execute()){
       echo '<script type="text/javascript">
       jQuery(function validation(){
 
         swal({
-          title: "Datos actualizados",
-          text: "Datos de la cita actualizado exitosamente",
+          title: "Checkin agreado",
+          text: "Checkin agreado exitosamente",
           icon: "success",
           button: "Ok",
         });
 
       })
       </script>';
-      header("location:appointment_list.php");
+      header("location:checkin_list.php");
       exit();
     }else{
       echo '<script type="text/javascript">
       jQuery(function validation(){
-  
+
         swal({
           title: "Error!",
-          text: "Los datos de la cita NO pudieron ser actualizados",
+          text: "El Checkin NO pudo ser agregado",
           icon: "error",
           button: "Ok",
         });
-  
+
       })
       </script>';
     }
 
   }
-
 
   if($_SESSION['role']=="Admin"){
     include_once'header.php';
@@ -109,7 +134,7 @@
       
       <div class="card card-info">
         <div class="card-header">
-          <h3 class="card-title"><a href="appointment_list.php" class="btn btn-primary" role="button">Lista de Checkins</a></h3>
+          <h3 class="card-title"><a href="checkin_list.php" class="btn btn-primary" role="button">Lista de Checkins</a></h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -119,55 +144,83 @@
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- first section 6 columns -->
                 <div class="form-group">
                   <label>Nombre del Paciente</label>
-                  <input type="text" class="form-control" name="txt_nombre_apellido" disabled value="<?php echo $nombrecompleto_db;?>" disabled>
+                  <input type="text" class="form-control" name="txt_nombre_apellido" value="<?php echo $nombrecompleto_db;?>" required disabled>
                 </div>
+              </div> <!-- end first section 6 columns -->
+              <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
+                <div class="form-group">
+                  <label>Fecha del Checkin:</label>
+                    <input type="datetime-local" class="form-control" data-date-inline-picker="true"  name="txt_fecha" required>
+                </div>
+              </div> <!-- end second section 6 columns -->
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12"> <!-- 12 columns section-->
+                <div class="form-group">
+                  <label>Razon</label>
+                  <textarea type="text" class="form-control" name="txt_razon" rows="2"></textarea>
+                </div>
+              </div> <!-- end 12 columns section-->
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-md-6 col-lg-6"> <!-- 6 columns section-->
                 <div class="form-group">
                   <label>Precion Arterial</label>
-                  <input type="text" class="form-control" name="txt_parterial" >
+                  <input type="text" class="form-control" name="txt_parterial">
                 </div>
                 <div class="form-group">
-                  <label>Peso</label>
-                  <input type="text" class="form-control" name="txt_peso">
+                  <label>Frecuencia Respiratoria</label>
+                  <input type="text" class="form-control" name="txt_frec_resp">
+                </div>
+                <div class="form-group">
+                  <label>Saturacion O2</label>
+                  <input type="text" class="form-control" name="txt_sato2">
                 </div>
                 <div class="form-group">
                   <label>Estatura</label>
                   <input type="text" class="form-control" name="txt_estatura">
                 </div>
+              </div> <!-- end 6 columns section-->
+              <div class="col-sm-6 col-md-6 col-lg-6"> <!-- 6 columns section-->
                 <div class="form-group">
-                  <label>Plan</label>
-                  <textarea type="text" class="form-control" name="txt_plan" rows="7"></textarea>
-                </div>
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-info" name="btncupdate">Actualizar</button>
-                </div>
-
-              </div> <!-- end first section 6 columns -->
-              <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
-                <div class="form-group">
-                  <label>Fecha del Checkin:</label>
-                    <input type="date" class="form-control" name="txt_fecha" >
-                </div>
-                <div class="form-group">
-                  <label>Razon</label>
-                  <textarea type="text" class="form-control" name="txt_razon" rows="2"></textarea>
+                  <label>Pulso</label>
+                  <input type="text" class="form-control" name="txt_pulso">
                 </div>
                 <div class="form-group">
                   <label>Temperatura</label>
                   <input type="text" class="form-control" name="txt_temperatura">
                 </div>
                 <div class="form-group">
-                  <label>IMC</label>
-                  <input type="text" class="form-control" name="txt_imc" >
+                  <label>Peso</label>
+                  <input type="text" class="form-control" name="txt_peso">
                 </div>
                 <div class="form-group">
-                  <label>Diagnostico</label>
-                  <textarea type="text" class="form-control" name="txt_diagnostico" rows="6" ></textarea>
+                  <label>IMC</label>
+                  <input type="text" class="form-control" name="txt_imc">
                 </div>
-              </div> <!-- end second section 6 columns -->
+              </div> <!-- end 6 columns section-->
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Impresion Diagnostica</label>
+                  <textarea type="text" class="form-control" name="txt_diagnostico" rows="6"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Plan</label>
+                  <textarea type="text" class="form-control" name="txt_plan" rows="6"></textarea>
+                </div>
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-info" name="btncupdate">Actualizar</button>
+                </div>
+              </div>
             </div>
           </div>
         </form>
-        <!-- /.card-body -->
       </div>
 
 
