@@ -51,7 +51,6 @@
                     <th>#</th>
                     <th>Nombre</th>         
                     <th>Fecha</th>
-                    <th>Diagnostico</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -74,7 +73,6 @@
                             <td>'.$row->checkid.'</td>
                             <td>'.$row->pnombre.'</td>
                             <td>'.$row->fecha.'</td>
-                            <td>'.$row->diagnostico.'</td>
                             <td>
                               <a href="viewcheckin.php?id='.$row->checkid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
                             </td>
@@ -94,7 +92,6 @@
                     <th>#</th>
                     <th>Nombre</th>         
                     <th>Fecha</th>
-                    <th>Diagnostico</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
