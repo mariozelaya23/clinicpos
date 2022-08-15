@@ -52,30 +52,29 @@
     $frec_res_txt = $_POST['txt_frec_resp'];
     $sato2_txt = $_POST['txt_sato2'];
 
-    $update = $pdo->prepare("INSERT INTO tbl_checkin(fecha,razon,parterial,peso,estatura,temperatura,plan,diagnostico,IMC,pacienteid,pulso,frec_res,sato2)
-    VALUES(:fecha,:razon,:parterial,:peso,:estatura,:temperatura,:plan,:diagnostico,:IMC,:pacienteid,:pulso,:frec_res,:sato2)");
+    $update = $pdo->prepare("UPDATE tbl_checkin SET fecha=:fecha, parterial=:parterial, peso=:peso, estatura=:estatura, temperatura=:temperatura, plan=:plan, diagnostico=:diagnostico,
+                            IMC=:IMC, razon=:razon, pulso=:pulso, frec_res=:frec_res, sato2=:sato2 WHERE checkid=$id_db");
 
-    $insert->bindParam(':fecha',$fecha);
-    $insert->bindParam(':razon',$razon);
-    $insert->bindParam(':parterial',$parterial);
-    $insert->bindParam(':peso',$peso);
-    $insert->bindParam(':estatura',$estatura);
-    $insert->bindParam(':temperatura',$temperatura);
-    $insert->bindParam(':plan',$plan);
-    $insert->bindParam(':diagnostico',$diagnostico);
-    $insert->bindParam(':IMC',$IMC);
-    $insert->bindParam(':pacienteid',$id_db);
-    $insert->bindParam(':pulso',$pulso);
-    $insert->bindParam(':frec_res',$frec_res);
-    $insert->bindParam(':sato2',$sato2);
+    $update->bindParam(':fecha',$citafecha_txt);
+    $update->bindParam(':parterial',$parterial_txt);
+    $update->bindParam(':peso',$peso_txt);
+    $update->bindParam(':estatura',$estatura_txt);
+    $update->bindParam(':temperatura',$temperatura_txt);
+    $update->bindParam(':plan',$plan_txt);
+    $update->bindParam(':diagnostico',$diagnostico_txt);
+    $update->bindParam(':IMC',$IMC_txt);
+    $update->bindParam(':razon',$razon_txt);
+    $update->bindParam(':pulso',$pulso_txt);
+    $update->bindParam(':frec_res',$frec_res_txt);
+    $update->bindParam(':sato2',$sato2_txt);
 
     if($insert->execute()){
       echo '<script type="text/javascript">
       jQuery(function validation(){
 
         swal({
-          title: "Checkin agreado",
-          text: "Checkin agreado exitosamente",
+          title: "Checkin modificado",
+          text: "Checkin modificado exitosamente",
           icon: "success",
           button: "Ok",
         });
@@ -90,7 +89,7 @@
 
         swal({
           title: "Error!",
-          text: "El Checkin NO pudo ser agregado",
+          text: "El Checkin NO pudo ser modificado",
           icon: "error",
           button: "Ok",
         });
@@ -150,7 +149,7 @@
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                 <div class="form-group">
                   <label>Fecha del Checkin:</label>
-                    <input type="datetime-local" class="form-control" data-date-inline-picker="true"  name="txt_fecha" required>
+                    <input type="datetime-local" class="form-control" data-date-inline-picker="true"  name="txt_fecha" value="<?php echo $citafecha_db;?>">
                 </div>
               </div> <!-- end second section 6 columns -->
             </div>
@@ -158,7 +157,7 @@
               <div class="col-sm-12 col-md-12 col-lg-12"> <!-- 12 columns section-->
                 <div class="form-group">
                   <label>Razon</label>
-                  <textarea type="text" class="form-control" name="txt_razon" rows="2"></textarea>
+                  <textarea type="text" class="form-control" name="txt_razon" rows="2"><?php echo $razon_db;?></textarea>
                 </div>
               </div> <!-- end 12 columns section-->
             </div>
@@ -166,37 +165,37 @@
               <div class="col-sm-6 col-md-6 col-lg-6"> <!-- 6 columns section-->
                 <div class="form-group">
                   <label>Precion Arterial</label>
-                  <input type="text" class="form-control" name="txt_parterial">
+                  <input type="text" class="form-control" name="txt_parterial" value="<?php echo $parterial_db;?>">
                 </div>
                 <div class="form-group">
                   <label>Frecuencia Respiratoria</label>
-                  <input type="text" class="form-control" name="txt_frec_resp">
+                  <input type="text" class="form-control" name="txt_frec_resp" value="<?php echo $frec_res_db;?>">
                 </div>
                 <div class="form-group">
                   <label>Saturacion O2</label>
-                  <input type="text" class="form-control" name="txt_sato2">
+                  <input type="text" class="form-control" name="txt_sato2" value="<?php echo $sato2_db;?>">
                 </div>
                 <div class="form-group">
                   <label>Estatura</label>
-                  <input type="text" class="form-control" name="txt_estatura">
+                  <input type="text" class="form-control" name="txt_estatura" value="<?php echo $estatura_db;?>">
                 </div>
               </div> <!-- end 6 columns section-->
               <div class="col-sm-6 col-md-6 col-lg-6"> <!-- 6 columns section-->
                 <div class="form-group">
                   <label>Pulso</label>
-                  <input type="text" class="form-control" name="txt_pulso">
+                  <input type="text" class="form-control" name="txt_pulso" value="<?php echo $pulso_db;?>">
                 </div>
                 <div class="form-group">
                   <label>Temperatura</label>
-                  <input type="text" class="form-control" name="txt_temperatura">
+                  <input type="text" class="form-control" name="txt_temperatura" value="<?php echo $temperatura_db?>">
                 </div>
                 <div class="form-group">
                   <label>Peso</label>
-                  <input type="text" class="form-control" name="txt_peso">
+                  <input type="text" class="form-control" name="txt_peso" value="<?php echo $peso_db;?>">
                 </div>
                 <div class="form-group">
                   <label>IMC</label>
-                  <input type="text" class="form-control" name="txt_imc">
+                  <input type="text" class="form-control" name="txt_imc" value="<?php echo $IMC_db;?>">
                 </div>
               </div> <!-- end 6 columns section-->
             </div>
@@ -204,7 +203,7 @@
               <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
                   <label>Impresion Diagnostica</label>
-                  <textarea type="text" class="form-control" name="txt_diagnostico" rows="6"></textarea>
+                  <textarea type="text" class="form-control" name="txt_diagnostico" rows="6"><?php echo $diagnostico_db;?></textarea>
                 </div>
               </div>
             </div>
@@ -212,7 +211,7 @@
               <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
                   <label>Plan</label>
-                  <textarea type="text" class="form-control" name="txt_plan" rows="6"></textarea>
+                  <textarea type="text" class="form-control" name="txt_plan" rows="6"><?php echo $plan_db;?></textarea>
                 </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-info" name="btncupdate">Actualizar</button>
