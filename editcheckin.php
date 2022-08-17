@@ -68,7 +68,7 @@
     $update->bindParam(':frec_res',$frec_res_txt);
     $update->bindParam(':sato2',$sato2_txt);
 
-    if($insert->execute()){
+    if($update->execute()){
       echo '<script type="text/javascript">
       jQuery(function validation(){
 
