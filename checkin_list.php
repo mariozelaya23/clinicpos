@@ -80,7 +80,7 @@
                               <a href="editcheckin.php?id='.$row->checkid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
                             </td>
                             <td>
-                            <button id='.$row->checkid.' class="btn btn-block btn-danger btn-xs btnpdelete" >Eliminar</button>
+                            <button id='.$row->checkid.' class="btn btn-block btn-danger btn-xs btncdelete" >Eliminar</button>
                             </td>
                           </tr>
                         ';
@@ -134,7 +134,7 @@
 <!-- DELETE BUTTON AJAX CODE -->
 <script>
   $(document).ready(function(){
-    $('.btnpdelete').click(function(){
+    $('.btncdelete').click(function(){
       //alert('Test');
 
       var tdh = $(this);
@@ -142,7 +142,7 @@
       //alert(id);
       //sweet alert
       swal({
-        title: "¿Está seguro de desea eliminar el paciente?",
+        title: "¿Está seguro de desea eliminar el este checkin?",
         text: "¡Una vez eliminado no se puede recuperar este registro!",
         icon: "warning",
         buttons: true,
@@ -151,25 +151,23 @@
       .then((willDelete) => {
         if (willDelete) { //ajax code
           $.ajax({
-            url:'deletepatient.php',
+            url:'deletecheckin.php',
             type:'POST',
             data:{
-              pidd:id
+              checkidd:id
             },
             success:function(data){
               tdh.parents('tr').hide();
             }
           })
-          swal("¡El paciente ha sido eliminado exitosamente!", {
+          swal("¡El checkin ha sido eliminado exitosamente!", {
             icon: "success",
           });
         } else {
-          swal("¡El paciente no fue eliminado");
+          swal("¡El checkin no fue eliminado");
         }
       });
-
     });
-  
   });
 
 </script>
