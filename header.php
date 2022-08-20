@@ -212,7 +212,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a>
               </li>
               <li class="nav-item">
-                <a href="checkin_list.php" class="nav-link">
+                <a href="mstories_list.php" class="nav-link">
                   <i class="fas fa-solid fa-list-ol"></i>
                   <p>Lista de Historias</p>
                 </a>
