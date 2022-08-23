@@ -71,7 +71,7 @@
                             <td>'.$row->pnombre.'</td>
                             <td>'.$row->fecha.'</td>
                             <td>
-                              <a href="viewcheckin.php?id='.$row->historiaid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
+                              <a href="viewhistoria.php?id='.$row->historiaid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
                             </td>
                             <td>
                               <a href="editcheckin.php?id='.$row->historiaid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
