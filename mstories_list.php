@@ -49,8 +49,10 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Nombre</th>         
-                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>F.Nac</th>         
+                    <th>Fecha Historia</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -59,7 +61,7 @@
                   <tbody>
                     <?php
                       $select = $pdo->prepare("SELECT h.historiaid AS historiaid, CONCAT(p.pnombre,' ',p.papellido) AS pnombre, 
-                                                h.timestamp AS fecha 
+                                                h.timestamp AS fecha, p.pnumerotel AS ptel, p.pfnac AS fnac 
                                                 FROM tbl_historia h
                                                 INNER JOIN tbl_paciente p
                                                 ON p.pid = h.pacienteid");
@@ -69,12 +71,14 @@
                           <tr>
                             <td>'.$row->historiaid.'</td>
                             <td>'.$row->pnombre.'</td>
+                            <td>'.$row->ptel.'</td>
+                            <td>'.$row->fnac.'</td>
                             <td>'.$row->fecha.'</td>
                             <td>
                               <a href="viewhistoria.php?id='.$row->historiaid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
                             </td>
                             <td>
-                              <a href="editcheckin.php?id='.$row->historiaid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
+                              <a href="edithistoria.php?id='.$row->historiaid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnpedit">Editar</a>
                             </td>
                             <td>
                             <button id='.$row->historiaid.' class="btn btn-block btn-danger btn-xs btncdelete" >Eliminar</button>
@@ -88,7 +92,9 @@
                   <tr>
                     <th>#</th>
                     <th>Nombre</th>         
-                    <th>Fecha</th>
+                    <th>Telefono</th>
+                    <th>F.Nac</th>         
+                    <th>Fecha Historia</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
