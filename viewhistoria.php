@@ -72,7 +72,7 @@
                   <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
                       <label>Historia</label>
-                      <textarea type="text" class="form-control" name="txt_historia" rows="2" disabled>'.$row->historia.'</textarea>
+                      <textarea type="text" class="form-control" name="txt_historia" rows="20" disabled>'.$row->historia.'</textarea>
                     </div>
                   </div>
                   ';
