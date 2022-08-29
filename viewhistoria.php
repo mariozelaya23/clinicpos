@@ -40,7 +40,7 @@
       
       <div class="card card-info">
         <div class="card-header">
-          <h3 class="card-title"><a href="checkin_list.php" class="btn btn-primary" role="button">Lista de Historias</a></h3>
+          <h3 class="card-title"><a href="mstories_list.php" class="btn btn-primary" role="button">Lista de Historias</a></h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
