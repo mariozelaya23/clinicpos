@@ -206,7 +206,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="checkin_list_patient.php" class="nav-link">
+                <a href="historia_list_patient.php" class="nav-link">
                   <i class="fas fa-solid fa-check"></i>
                   <p>Agregar Historia</p>
                 </a>
