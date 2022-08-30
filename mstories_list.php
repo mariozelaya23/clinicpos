@@ -145,8 +145,8 @@
       //alert(id);
       //sweet alert
       swal({
-        title: "¿Está seguro de desea eliminar el este checkin?",
-        text: "¡Una vez eliminado no se puede recuperar este registro!",
+        title: "¿Está seguro de desea eliminar la historia?",
+        text: "¡Una vez eliminada no se puede recuperar este registro!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -154,7 +154,7 @@
       .then((willDelete) => {
         if (willDelete) { //ajax code
           $.ajax({
-            url:'deletecheckin.php',
+            url:'deletehistoria.php',
             type:'POST',
             data:{
               checkidd:id
@@ -163,11 +163,11 @@
               tdh.parents('tr').hide();
             }
           })
-          swal("¡El checkin ha sido eliminado exitosamente!", {
+          swal("¡La historia se ha sido eliminado exitosamente!", {
             icon: "success",
           });
         } else {
-          swal("¡El checkin no fue eliminado");
+          swal("¡La historia no fue eliminado");
         }
       });
     });
