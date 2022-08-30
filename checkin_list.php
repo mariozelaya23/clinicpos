@@ -49,8 +49,10 @@
                   <thead>
                   <tr>
                     <th>#</th>
-                    <th>Nombre</th>         
-                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>F.Nac</th>          
+                    <th>F. Checkin</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -59,9 +61,9 @@
                   <tbody>
                     <?php
                       $select = $pdo->prepare("SELECT ch.checkid AS checkid, CONCAT(p.pnombre,' ',p.papellido) AS pnombre, 
-                                                ch.fecha AS fecha, ch.parterial AS parterial, ch.peso AS peso, 
+                                                p.pnumerotel AS ptel, ch.fecha AS fecha, ch.parterial AS parterial, ch.peso AS peso, 
                                                 ch.estatura AS estatura, ch.temperatura AS temperatura, ch.plan AS plan,
-                                                ch.diagnostico AS diagnostico, ch.IMC AS IMC, ch.razon AS razon 
+                                                ch.diagnostico AS diagnostico, ch.IMC AS IMC, ch.razon AS razon, p.pfnac AS fnac 
                                                 FROM tbl_checkin ch
                                                 INNER JOIN tbl_paciente p
                                                 ON p.pid = ch.pacienteid
@@ -72,6 +74,8 @@
                           <tr>
                             <td>'.$row->checkid.'</td>
                             <td>'.$row->pnombre.'</td>
+                            <td>'.$row->ptel.'</td>
+                            <td>'.$row->fnac.'</td>
                             <td>'.$row->fecha.'</td>
                             <td>
                               <a href="viewcheckin.php?id='.$row->checkid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpview">Ver</a>
@@ -91,7 +95,9 @@
                   <tr>
                     <th>#</th>
                     <th>Nombre</th>         
-                    <th>Fecha</th>
+                    <th>Telefono</th>
+                    <th>F.Nac</th>          
+                    <th>F. Checkin</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
