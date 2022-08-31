@@ -24,12 +24,13 @@
     $histfecha = $_POST['txt_histfecha'];
     $historia = $_POST['txt_historia'];
 
-    $insert = $pdo->prepare("INSERT INTO tbl_historia(historia,timestamp) VALUES(:historia,:timestamp)");
+    $insert = $pdo->prepare("INSERT INTO tbl_historia(historia,pacienteid,timestamp) VALUES(:historia,:pacienteid,:timestamp)");
 
     $insert->bindParam(':timestamp',$histfecha);
+    $insert->bindParam(':pacienteid',$id_db);
     $insert->bindParam(':historia',$historia);
 
-    if($update->execute()){
+    if($insert->execute()){
       echo '<script type="text/javascript">
       jQuery(function validation(){
 
@@ -104,13 +105,13 @@
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- first section 6 columns -->
                 <div class="form-group">
                   <label>Nombre del Paciente</label>
-                  <input type="text" class="form-control" name="txt_nombre_apellido" value="<?php $pnombre_db.' '.$papellido_db;?>" required disabled>
+                  <input type="text" class="form-control" name="txt_nombre_apellido" value="<?php echo $pnombre_db.' '.$papellido_db;?>" required disabled>
                 </div>
               </div> <!-- end first section 6 columns -->
               <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
                 <div class="form-group">
                   <label>Fecha de la Historia:</label>
-                    <input type="datetime-local" class="form-control" data-date-inline-picker="true"  name="txt_histfecha" value="<?php echo $histfecha;?>">
+                    <input type="datetime-local" class="form-control" data-date-inline-picker="true"  name="txt_histfecha" required>
                 </div>
               </div> <!-- end second section 6 columns -->
             </div>
@@ -118,7 +119,7 @@
               <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
                   <label>Historia</label>
-                  <textarea type="text" class="form-control" name="txt_historia" rows="20"><?php echo $historia;?></textarea>
+                  <textarea type="text" class="form-control" name="txt_historia" rows="20"></textarea>
                 </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-info" name="btnadd_hist">Agregar</button>
