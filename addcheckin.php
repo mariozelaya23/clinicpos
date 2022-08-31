@@ -171,33 +171,33 @@
                 </div>
                 <div class="form-group">
                   <label>Frecuencia Respiratoria</label>
-                  <input type="text" class="form-control" name="txt_frec_resp">
+                  <input type="number" class="form-control" name="txt_frec_resp">
                 </div>
                 <div class="form-group">
                   <label>Saturacion O2</label>
-                  <input type="text" class="form-control" name="txt_sato2">
+                  <input type="number" class="form-control" name="txt_sato2">
                 </div>
                 <div class="form-group">
-                  <label>Estatura</label>
-                  <input type="text" class="form-control" name="txt_estatura">
+                  <label>Estatura (metros)</label>
+                  <input type="number" step="0.01" class="form-control" name="txt_estatura">
                 </div>
               </div> <!-- end 6 columns section-->
               <div class="col-sm-6 col-md-6 col-lg-6"> <!-- 6 columns section-->
                 <div class="form-group">
                   <label>Pulso</label>
-                  <input type="text" class="form-control" name="txt_pulso">
+                  <input type="number" class="form-control" name="txt_pulso">
                 </div>
                 <div class="form-group">
                   <label>Temperatura</label>
-                  <input type="text" class="form-control" name="txt_temperatura">
+                  <input type="number" step="0.01" class="form-control" name="txt_temperatura">
                 </div>
                 <div class="form-group">
                   <label>Peso</label>
-                  <input type="text" class="form-control" name="txt_peso">
+                  <input type="number" step="0.01" class="form-control" name="txt_peso">
                 </div>
                 <div class="form-group">
                   <label>IMC</label>
-                  <input type="text" class="form-control" name="txt_imc">
+                  <input type="number" step="0.1" class="form-control" name="txt_imc">
                 </div>
               </div> <!-- end 6 columns section-->
             </div>
