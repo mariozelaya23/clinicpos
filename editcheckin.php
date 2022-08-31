@@ -169,33 +169,33 @@
                 </div>
                 <div class="form-group">
                   <label>Frecuencia Respiratoria</label>
-                  <input type="text" class="form-control" name="txt_frec_resp" value="<?php echo $frec_res_db;?>">
+                  <input type="number" class="form-control" name="txt_frec_resp" value="<?php echo $frec_res_db;?>">
                 </div>
                 <div class="form-group">
                   <label>Saturacion O2</label>
-                  <input type="text" class="form-control" name="txt_sato2" value="<?php echo $sato2_db;?>">
+                  <input type="number" class="form-control" name="txt_sato2" value="<?php echo $sato2_db;?>">
                 </div>
                 <div class="form-group">
-                  <label>Estatura</label>
-                  <input type="text" class="form-control" name="txt_estatura" value="<?php echo $estatura_db;?>">
+                  <label>Estatura (metros)</label>
+                  <input type="number" step="0.01" class="form-control" name="txt_estatura" value="<?php echo $estatura_db;?>">
                 </div>
               </div> <!-- end 6 columns section-->
               <div class="col-sm-6 col-md-6 col-lg-6"> <!-- 6 columns section-->
                 <div class="form-group">
                   <label>Pulso</label>
-                  <input type="text" class="form-control" name="txt_pulso" value="<?php echo $pulso_db;?>">
+                  <input type="number" class="form-control" name="txt_pulso" value="<?php echo $pulso_db;?>">
                 </div>
                 <div class="form-group">
                   <label>Temperatura</label>
-                  <input type="text" class="form-control" name="txt_temperatura" value="<?php echo $temperatura_db?>">
+                  <input type="number" step="0.01" class="form-control" name="txt_temperatura" value="<?php echo $temperatura_db?>">
                 </div>
                 <div class="form-group">
                   <label>Peso</label>
-                  <input type="text" class="form-control" name="txt_peso" value="<?php echo $peso_db;?>">
+                  <input type="number" step="0.01" class="form-control" name="txt_peso" value="<?php echo $peso_db;?>">
                 </div>
                 <div class="form-group">
                   <label>IMC</label>
-                  <input type="text" class="form-control" name="txt_imc" value="<?php echo $IMC_db;?>">
+                  <input type="number" step="0.1" class="form-control" name="txt_imc" value="<?php echo $IMC_db;?>">
                 </div>
               </div> <!-- end 6 columns section-->
             </div>
