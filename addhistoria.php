@@ -24,7 +24,12 @@
     $histfecha = $_POST['txt_histfecha'];
     $historia = $_POST['txt_historia'];
 
-    $insert = $pdo->prepare("INSERT INTO tbl_historia(historia,pacienteid,timestamp) VALUES(:historia,:pacienteid,:timestamp)");
+    // $insert = $pdo->prepare("INSERT INTO tbl_historia(historia,pacienteid,timestamp) VALUES(:historia,:pacienteid,:timestamp)");
+
+    $insert = $pdo->prepare("INSERT INTO tbl_historia(historia,pacienteid,timestamp) 
+                            SELECT :historia,:pacienteid,:timestamp FROM DUAL
+                            WHERE NOT EXISTS (SELECT * FROM tbl_historia
+                                              WHERE historia = :historia OR pacienteid = :pacienteid OR timestamp = :timestamp LIMIT 1)");
 
     $insert->bindParam(':timestamp',$histfecha);
     $insert->bindParam(':pacienteid',$id_db);
