@@ -2,11 +2,10 @@
   include_once'connectdb.php';
   session_start();
 
-  if($_SESSION['useremail']=="" OR $_SESSION['role']=="User"){  //with this session variable changepassword.php wont open until you login
+  if($_SESSION['useremail']=="" OR $_SESSION['role']=="Usuario"){  //with this session variable changepassword.php wont open until you login
     header('location:index.php');
     exit();
   }
- 
 
   // getting the patient id from patient list page as well the data from that page
   $id = $_GET['id'];
