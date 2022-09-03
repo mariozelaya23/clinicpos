@@ -42,6 +42,7 @@
   if(isset($_POST['btnadd_app'])){
     $fecha = $_POST['txt_fecha'];
     $razon = $_POST['txt_razon'];
+    $historia = $_POST['txt_historia'];
     $parterial = $_POST['txt_parterial'];
     $pulso = $_POST['txt_pulso'];
     $frec_res = $_POST['txt_frec_resp'];
@@ -50,11 +51,13 @@
     $sato2 = $_POST['txt_sato2'];
     $temperatura = $_POST['txt_temperatura'];
     $plan = $_POST['txt_plan'];
+    $exploracion = $_POST['txt_exploracion'];
     $diagnostico = $_POST['txt_diagnostico'];
     $IMC = $_POST['txt_imc'];
 
-    $insert = $pdo->prepare("INSERT INTO tbl_checkin(fecha,razon,parterial,peso,estatura,temperatura,plan,diagnostico,IMC,pacienteid,pulso,frec_res,sato2)
-    VALUES(:fecha,:razon,:parterial,:peso,:estatura,:temperatura,:plan,:diagnostico,:IMC,:pacienteid,:pulso,:frec_res,:sato2)");
+    $insert = $pdo->prepare("INSERT INTO tbl_checkin(fecha,razon,parterial,peso,estatura,temperatura,plan,diagnostico,
+    IMC,pacienteid,pulso,frec_res,sato2,historia,exploracion) VALUES(:fecha,:razon,:parterial,:peso,:estatura,:temperatura,:plan,:diagnostico,
+    :IMC,:pacienteid,:pulso,:frec_res,:sato2,:historia,:exploracion)");
 
     $insert->bindParam(':fecha',$fecha);
     $insert->bindParam(':razon',$razon);
@@ -69,6 +72,8 @@
     $insert->bindParam(':pulso',$pulso);
     $insert->bindParam(':frec_res',$frec_res);
     $insert->bindParam(':sato2',$sato2);
+    $insert->bindParam(':historia',$historia);
+    $insert->bindParam(':exploracion',$exploracion);
 
     if($insert->execute()){
       echo '<script type="text/javascript">
@@ -158,15 +163,23 @@
             <div class="row">
               <div class="col-sm-12 col-md-12 col-lg-12"> <!-- 12 columns section-->
                 <div class="form-group">
-                  <label>Razon</label>
+                  <label>Razón</label>
                   <textarea type="text" class="form-control" name="txt_razon" rows="2"></textarea>
+                </div>
+              </div> <!-- end 12 columns section-->
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12"> <!-- 12 columns section-->
+                <div class="form-group">
+                  <label>Historia</label>
+                  <textarea type="text" class="form-control" name="txt_historia" rows="3"></textarea>
                 </div>
               </div> <!-- end 12 columns section-->
             </div>
             <div class="row">
               <div class="col-sm-6 col-md-6 col-lg-6"> <!-- 6 columns section-->
                 <div class="form-group">
-                  <label>Precion Arterial</label>
+                  <label>Presión Arterial</label>
                   <input type="text" class="form-control" name="txt_parterial">
                 </div>
                 <div class="form-group">
@@ -174,7 +187,7 @@
                   <input type="number" class="form-control" name="txt_frec_resp">
                 </div>
                 <div class="form-group">
-                  <label>Saturacion O2</label>
+                  <label>Saturación O2</label>
                   <input type="number" class="form-control" name="txt_sato2">
                 </div>
                 <div class="form-group">
@@ -204,7 +217,15 @@
             <div class="row">
               <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
-                  <label>Impresion Diagnostica</label>
+                  <label>Exploración</label>
+                  <textarea type="text" class="form-control" name="txt_exploracion" rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Impresión Diagnostica</label>
                   <textarea type="text" class="form-control" name="txt_diagnostico" rows="6"></textarea>
                 </div>
               </div>
