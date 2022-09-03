@@ -54,8 +54,8 @@
                     <th>Domicilio</th>
                     <th>Email</th>
                     <th>Teléfono</th>
-                    <th>F. Nacimiento</th>
-                    <th>Cita</th>
+                    <th>F.Nac</th>
+                    <th></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -73,7 +73,7 @@
                             <td>'.$row->pnumerotel.'</td>
                             <td>'.$row->pfnac.'</td>
                             <td>
-                              <a href="addcheckin.php?id='.$row->pid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpadd_appo">Agregar Checkin</a>
+                              <a href="addcheckin.php?id='.$row->pid.'" class="btn btn-block btn-success btn-xs" role="button" name="btnpadd_checkin">Agregar Checkin</a>
                             </td>
                           </tr>
                         ';
@@ -88,8 +88,8 @@
                     <th>Domicilio</th>
                     <th>Email</th>
                     <th>Teléfono</th>
-                    <th>F. Nacimiento</th>
-                    <th>Cita</th>
+                    <th>F.Nac</th>
+                    <th></th>
                   </tr>
                   </tfoot>
                 </table>
@@ -124,49 +124,6 @@
       "responsive": true, "lengthChange": false, "autoWidth": false
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   } );
-</script>
-
-<!-- DELETE BUTTON AJAX CODE -->
-<script>
-  $(document).ready(function(){
-    $('.btnpdelete').click(function(){
-      //alert('Test');
-
-      var tdh = $(this);
-      var id = $(this).attr("id");
-      //alert(id);
-      //sweet alert
-      swal({
-        title: "¿Está seguro de desea eliminar el paciente?",
-        text: "¡Una vez eliminado no se puede recuperar este registro!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) { //ajax code
-          $.ajax({
-            url:'deletepatient.php',
-            type:'POST',
-            data:{
-              pidd:id
-            },
-            success:function(data){
-              tdh.parents('tr').hide();
-            }
-          })
-          swal("¡El paciente ha sido eliminado exitosamente!", {
-            icon: "success",
-          });
-        } else {
-          swal("¡El paciente no fue eliminado");
-        }
-      });
-
-    });
-  
-  });
-
 </script>
 
 <?php
