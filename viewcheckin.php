@@ -53,7 +53,8 @@
                                         ch.fecha AS fecha, ch.parterial AS parterial, ch.peso AS peso, 
                                         ch.estatura AS estatura, ch.temperatura AS temperatura, ch.plan AS plan,
                                         ch.diagnostico AS diagnostico, ch.IMC AS IMC, ch.razon AS razon, ch.pulso AS pulso,
-                                        ch.frec_res AS frec_res, ch.sato2 AS sato2
+                                        ch.frec_res AS frec_res, ch.sato2 AS sato2, ch.historia AS historia,
+                                        ch.exploracion AS exploracion
                                         FROM tbl_checkin ch
                                         INNER JOIN tbl_paciente p ON p.pid = ch.pacienteid
                                         WHERE ch.checkid=$id");
@@ -74,13 +75,19 @@
                   </div> <!-- end second section 6 columns -->
                   <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
-                      <label>Razon</label>
+                      <label>Razón</label>
                       <textarea type="text" class="form-control" name="txt_razon" rows="2" disabled>'.$row->razon.'</textarea>
                     </div>
                   </div>
+                  <div class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="form-group">
+                    <label>Historia</label>
+                    <textarea type="text" class="form-control" name="txt_historia" rows="3" disabled>'.$row->historia.'</textarea>
+                  </div>
+                </div>
                   <div class="col-sm-6 col-md-6 col-lg-6">   <!-- first section 6 columns -->
                     <div class="form-group">
-                      <label>Precion Arterial</label>
+                      <label>Presión Arterial</label>
                       <input type="text" class="form-control" name="txt_parterial" value="'.$row->parterial.'" disabled>
                     </div>
                     <div class="form-group">
@@ -88,7 +95,7 @@
                       <input type="text" class="form-control" name="txt_frec_resp" value="'.$row->frec_res.'" disabled>
                     </div>
                     <div class="form-group">
-                    <label>Saturacion O2</label>
+                    <label>Saturación O2</label>
                       <input type="text" class="form-control" name="txt_sato2" value="'.$row->sato2.'" disabled>
                     </div>
                     <div class="form-group">
@@ -115,8 +122,14 @@
                     </div>
                   </div> <!-- end second section 6 columns -->
                   <div class="col-sm-12 col-md-12 col-lg-12">
+                  <div class="form-group">
+                    <label>Exploración</label>
+                    <textarea type="text" class="form-control" name="txt_exploracion" rows="4" disabled>'.$row->exploracion.'</textarea>
+                  </div>
+                </div>
+                  <div class="col-sm-12 col-md-12 col-lg-12">
                     <div class="form-group">
-                      <label>Impresion Diagnostica</label>
+                      <label>Impresión Diagnostica</label>
                       <textarea type="text" class="form-control" name="txt_diagnostico" rows="6" disabled>'.$row->diagnostico.'</textarea>
                     </div>
                   </div>
