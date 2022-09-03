@@ -50,9 +50,9 @@
                   <tr>
                     <th>#</th>
                     <th>Nombre</th>
-                    <th>Telefono</th>
+                    <th>Teléfono</th>
                     <th>F.Nac</th>          
-                    <th>F. Checkin</th>
+                    <th>F.Checkin</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
@@ -61,9 +61,7 @@
                   <tbody>
                     <?php
                       $select = $pdo->prepare("SELECT ch.checkid AS checkid, CONCAT(p.pnombre,' ',p.papellido) AS pnombre, 
-                                                p.pnumerotel AS ptel, ch.fecha AS fecha, ch.parterial AS parterial, ch.peso AS peso, 
-                                                ch.estatura AS estatura, ch.temperatura AS temperatura, ch.plan AS plan,
-                                                ch.diagnostico AS diagnostico, ch.IMC AS IMC, ch.razon AS razon, p.pfnac AS fnac 
+                                                p.pnumerotel AS ptel, ch.fecha AS fecha, p.pfnac AS fnac 
                                                 FROM tbl_checkin ch
                                                 INNER JOIN tbl_paciente p
                                                 ON p.pid = ch.pacienteid
@@ -95,9 +93,9 @@
                   <tr>
                     <th>#</th>
                     <th>Nombre</th>         
-                    <th>Telefono</th>
+                    <th>Teléfono</th>
                     <th>F.Nac</th>          
-                    <th>F. Checkin</th>
+                    <th>F.Checkin</th>
                     <th>Ver</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
