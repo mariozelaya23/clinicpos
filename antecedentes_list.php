@@ -81,7 +81,7 @@
                               <a href="editantecedente.php?id='.$row->antecedentesid.'" class="btn btn-block btn-info btn-xs" role="button" name="btnaedit">Editar</a>
                             </td>
                             <td>
-                            <button id='.$row->antecedentesid.' class="btn btn-block btn-danger btn-xs btnadelete" >Eliminar</button>
+                            <button id='.$row->antecedentesid.' class="btn btn-block btn-danger btn-xs btnadelete">Eliminar</button>
                             </td>
                           </tr>
                         ';
@@ -145,8 +145,8 @@
       //alert(id);
       //sweet alert
       swal({
-        title: "¿Está seguro de desea eliminar el Antecedente de este paciente?",
-        text: "¡Una vez eliminado no se puede recuperar este registro!",
+        title: "¿Está seguro de desea eliminar el este Antecedente?",
+        text: "¡Una vez eliminado el Antecedente no se puede recuperar este registro!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -157,17 +157,17 @@
             url:'deleteantecedente.php',
             type:'POST',
             data:{
-              checkidd:id
+              antecedentesidd:id
             },
             success:function(data){
               tdh.parents('tr').hide();
             }
           })
-          swal("¡El antecedente del paciente se ha eliminado exitosamente!", {
+          swal("¡El Antecedente ha sido eliminado exitosamente!", {
             icon: "success",
           });
         } else {
-          swal("¡El antecedente no fue eliminado");
+          swal("¡El Antecedente no fue eliminado");
         }
       });
     });
