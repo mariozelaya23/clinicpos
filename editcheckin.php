@@ -14,7 +14,7 @@
                           ch.fecha AS fecha, ch.parterial AS parterial, ch.peso AS peso, 
                           ch.estatura AS estatura, ch.temperatura AS temperatura, ch.plan AS plan,
                           ch.diagnostico AS diagnostico, ch.IMC AS IMC, ch.razon AS razon, ch.pulso AS pulso,
-                          ch.frec_res AS frec_res, ch.sato2 AS sato2
+                          ch.frec_res AS frec_res, ch.sato2 AS sato2, ch.historia AS historia, ch.exploracion AS exploracion
                           FROM tbl_checkin ch
                           INNER JOIN tbl_paciente p ON p.pid = ch.pacienteid
                           WHERE ch.checkid=$id");
@@ -32,6 +32,8 @@
   $diagnostico_db = $row['diagnostico'];
   $IMC_db = $row['IMC'];
   $razon_db = $row['razon'];
+  $historia_db = $row['historia'];
+  $exploracion_db = $row['exploracion'];
   $pulso_db = $row['pulso'];
   $frec_res_db = $row['frec_res'];
   $sato2_db = $row['sato2'];
@@ -48,12 +50,14 @@
     $diagnostico_txt = $_POST['txt_diagnostico'];
     $IMC_txt = $_POST['txt_imc'];
     $razon_txt = $_POST['txt_razon'];
+    $historia_txt = $_POST['txt_historia'];
+    $exploracion_txt = $_POST['txt_exploracion'];
     $pulso_txt = $_POST['txt_pulso'];
     $frec_res_txt = $_POST['txt_frec_resp'];
     $sato2_txt = $_POST['txt_sato2'];
 
     $update = $pdo->prepare("UPDATE tbl_checkin SET fecha=:fecha, parterial=:parterial, peso=:peso, estatura=:estatura, temperatura=:temperatura, plan=:plan, diagnostico=:diagnostico,
-                            IMC=:IMC, razon=:razon, pulso=:pulso, frec_res=:frec_res, sato2=:sato2 WHERE checkid=$id_db");
+                            IMC=:IMC, razon=:razon, pulso=:pulso, frec_res=:frec_res, sato2=:sato2, historia=:historia, exploracion=:exploracion WHERE checkid=$id_db");
 
     $update->bindParam(':fecha',$citafecha_txt);
     $update->bindParam(':parterial',$parterial_txt);
@@ -64,6 +68,8 @@
     $update->bindParam(':diagnostico',$diagnostico_txt);
     $update->bindParam(':IMC',$IMC_txt);
     $update->bindParam(':razon',$razon_txt);
+    $update->bindParam(':historia',$historia_txt);
+    $update->bindParam(':exploracion',$exploracion_txt);
     $update->bindParam(':pulso',$pulso_txt);
     $update->bindParam(':frec_res',$frec_res_txt);
     $update->bindParam(':sato2',$sato2_txt);
@@ -156,15 +162,23 @@
             <div class="row">
               <div class="col-sm-12 col-md-12 col-lg-12"> <!-- 12 columns section-->
                 <div class="form-group">
-                  <label>Razon</label>
+                  <label>Razón</label>
                   <textarea type="text" class="form-control" name="txt_razon" rows="2"><?php echo $razon_db;?></textarea>
+                </div>
+              </div> <!-- end 12 columns section-->
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12"> <!-- 12 columns section-->
+                <div class="form-group">
+                  <label>Historia</label>
+                  <textarea type="text" class="form-control" name="txt_historia" rows="3"><?php echo $historia_db;?></textarea>
                 </div>
               </div> <!-- end 12 columns section-->
             </div>
             <div class="row">
               <div class="col-sm-6 col-md-6 col-lg-6"> <!-- 6 columns section-->
                 <div class="form-group">
-                  <label>Precion Arterial</label>
+                  <label>Presión Arterial</label>
                   <input type="text" class="form-control" name="txt_parterial" value="<?php echo $parterial_db;?>">
                 </div>
                 <div class="form-group">
@@ -172,7 +186,7 @@
                   <input type="number" class="form-control" name="txt_frec_resp" value="<?php echo $frec_res_db;?>">
                 </div>
                 <div class="form-group">
-                  <label>Saturacion O2</label>
+                  <label>Saturación O2</label>
                   <input type="number" class="form-control" name="txt_sato2" value="<?php echo $sato2_db;?>">
                 </div>
                 <div class="form-group">
@@ -202,7 +216,15 @@
             <div class="row">
               <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group">
-                  <label>Impresion Diagnostica</label>
+                  <label>Exploración</label>
+                  <textarea type="text" class="form-control" name="txt_exploracion" rows="4"><?php echo $exploracion_db;?></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="form-group">
+                  <label>Impresión Diagnostica</label>
                   <textarea type="text" class="form-control" name="txt_diagnostico" rows="6"><?php echo $diagnostico_db;?></textarea>
                 </div>
               </div>
