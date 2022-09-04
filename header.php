@@ -221,29 +221,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-solid fa-book-medical"></i>
-              <p>
-                Historias
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="historia_list_patient.php" class="nav-link">
-                  <i class="fas fa-solid fa-check"></i>
-                  <p>Agregar Historia</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="mstories_list.php" class="nav-link">
-                  <i class="fas fa-solid fa-list-ol"></i>
-                  <p>Lista de Historias</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-cog"></i>
               <p>
                 Sistema
