@@ -21,12 +21,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Agregar Nueva Historia</h1>
+            <h1>Agregar Nuevo Antecedente</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Nueva Historia</li>
+              <li class="breadcrumb-item active">Nuevo Antecedente</li>
             </ol>
           </div>
         </div>
@@ -55,7 +55,7 @@
                     <th>Email</th>
                     <th>Teléfono</th>
                     <th>F.Nac</th>
-                    <th>Cita</th>
+                    <th></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -73,7 +73,7 @@
                             <td>'.$row->pnumerotel.'</td>
                             <td>'.$row->pfnac.'</td>
                             <td>
-                              <a href="addhistoria.php?id='.$row->pid.'" class="btn btn-block btn-primary btn-xs" role="button" name="btnpadd_appo">Agregar Historia</a>
+                              <a href="addantecedente.php?id='.$row->pid.'" class="btn btn-block btn-primary btn-xs" role="button" name="btnpadd_ante">Agregar Antecedente</a>
                             </td>
                           </tr>
                         ';
@@ -89,7 +89,7 @@
                     <th>Email</th>
                     <th>Teléfono</th>
                     <th>F.Nac</th>
-                    <th>Cita</th>
+                    <th></th>
                   </tr>
                   </tfoot>
                 </table>

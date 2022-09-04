@@ -200,6 +200,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-solid fa-book-medical"></i>
               <p>
+                Antecedentes
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="antecedente_list_patient.php" class="nav-link">
+                  <i class="fas fa-solid fa-check"></i>
+                  <p>Agregar Antecedentes</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="antecedentes_list.php" class="nav-link">
+                  <i class="fas fa-solid fa-list-ol"></i>
+                  <p>Lista de Antecedentes</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-solid fa-book-medical"></i>
+              <p>
                 Historias
                 <i class="fas fa-angle-left right"></i>
               </p>
