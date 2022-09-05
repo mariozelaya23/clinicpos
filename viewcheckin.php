@@ -145,18 +145,18 @@
               ?>
               <?php
                 $id = $_GET['id'];
-                $select = $pdo->prepare("SELECT h.historia AS historia
+                $select = $pdo->prepare("SELECT a.antecedentes AS antecedentes
                                         FROM tbl_checkin ch
                                         JOIN tbl_paciente p ON p.pid = ch.pacienteid
-                                        JOIN tbl_historia h ON p.pid = h.pacienteid
+                                        JOIN tbl_antecedente a ON p.pid = a.pacienteid
                                         WHERE ch.checkid=$id");
                 $select->execute();
                 while($row=$select->fetch(PDO::FETCH_OBJ)){
                   echo '
                     <div class="col-sm-12 col-md-12 col-lg-12">
                       <div class="form-group">
-                        <label>Historia</label>
-                        <textarea type="text" class="form-control" name="txt_historia" rows="6" disabled>'.$row->historia.'</textarea>
+                        <label>Antecedentes</label>
+                        <textarea type="text" class="form-control" name="txt_antecedentes" rows="6" disabled>'.$row->antecedentes.'</textarea>
                       </div>
                     </div>
                   ';
