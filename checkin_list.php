@@ -138,11 +138,12 @@
 <!-- DELETE BUTTON AJAX CODE -->
 <script>
   $(document).ready(function(){
-    $('.btncdelete').click(function(){
+    $(document).on('click','.btncdelete',function(e){
+      console.log('accc');
       //alert('Test');
-
-      var tdh = $(this);
-      var id = $(this).attr("id");
+      var btn = $(e.currentTarget);
+      var tdh = btn;
+      var id = btn.attr("id");
       //alert(id);
       //sweet alert
       swal({
