@@ -7,6 +7,12 @@
     exit();
   }
 
+  try {
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+
   // getting the patient id from patient list page as well the data from that page
   $id = $_GET['id'];
   $select = $pdo->prepare("SELECT * FROM tbl_paciente WHERE pid=$id");
