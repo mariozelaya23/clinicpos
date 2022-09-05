@@ -137,11 +137,11 @@
 <!-- DELETE BUTTON AJAX CODE -->
 <script>
   $(document).ready(function(){
-    $('.btnadelete').click(function(){
+    $(document).on('click','.btnadelete',function(e){
       //alert('Test');
-
-      var tdh = $(this);
-      var id = $(this).attr("id");
+      var btn = $(e.currentTarget);
+      var tdh = btn;
+      var id = btn.attr("id");
       //alert(id);
       //sweet alert
       swal({
