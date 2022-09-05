@@ -7,6 +7,12 @@
     exit();
   }
 
+  try {
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  }catch (PDOException $e){
+    echo $e->getMessage();
+  }
+
   // if($_SESSION['role']=="Admin"){
   //   include_once'header.php';
   // }else{
