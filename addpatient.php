@@ -6,6 +6,12 @@
     header('location:index.php');
   }
 
+  if($_SESSION['role']=="Admin"){
+    include_once'header.php';
+  }else{
+    include_once'headeruser.php';
+  }
+
   try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   }catch (PDOException $e){
@@ -41,11 +47,12 @@
             icon: "success",
             button: "Ok",
           });
-  
-        })
+          window.location.href = "patientlist.php";
+
+        }, 5000);
         </script>';
-        header("location:patientlist.php");
-        exit();
+        // header("location:patientlist.php");
+        // exit();
       }else{
         echo '<script type="text/javascript">
         jQuery(function validation(){
@@ -81,11 +88,11 @@
     }
   }
 
-  if($_SESSION['role']=="Admin"){
-    include_once'header.php';
-  }else{
-    include_once'headeruser.php';
-  }
+  // if($_SESSION['role']=="Admin"){
+  //   include_once'header.php';
+  // }else{
+  //   include_once'headeruser.php';
+  // }
 
 ?>
 
