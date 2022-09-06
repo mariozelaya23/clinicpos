@@ -7,17 +7,17 @@
     exit();
   }
 
+  if($_SESSION['role']=="Admin"){
+    include_once'header.php';
+  }else{
+    include_once'headeruser.php';
+  }
+
   try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   }catch (PDOException $e){
     echo $e->getMessage();
   }
-
-  // if($_SESSION['role']=="Admin"){
-  //   include_once'header.php';
-  // }else{
-  //   include_once'headeruser.php';
-  // }
 
   // getting the patient id from patient list page as well the data from that page
   $id = $_GET['id'];
@@ -91,11 +91,12 @@
           icon: "success",
           button: "Ok",
         });
+        window.location.href = "checkin_list.php";
 
-      })
+      }, 5000);
       </script>';
-      header("location:checkin_list.php");
-      exit();
+      // header("location:checkin_list.php");
+      // exit();
     }else{
       echo '<script type="text/javascript">
       jQuery(function validation(){
@@ -113,11 +114,11 @@
 
   }
 
-  if($_SESSION['role']=="Admin"){
-    include_once'header.php';
-  }else{
-    include_once'headeruser.php';
-  }
+  // if($_SESSION['role']=="Admin"){
+  //   include_once'header.php';
+  // }else{
+  //   include_once'headeruser.php';
+  // }
 
 
 ?>
