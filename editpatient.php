@@ -6,6 +6,12 @@
     header('location:index.php');
   }
 
+  if($_SESSION['role']=="Admin"){
+    include_once'header.php';
+  }else{
+    include_once'headeruser.php';
+  }
+
   // getting the patient id from patient list page as well the data from that page
   $id = $_GET['id'];
   $select = $pdo->prepare("SELECT * FROM tbl_paciente WHERE pid=$id");
@@ -49,11 +55,12 @@
           icon: "success",
           button: "Ok",
         });
+        window.location.href = "patientlist.php";
 
-      })
+      }, 5000)
       </script>';
-      header("location:patientlist.php");
-      exit();
+      // header("location:patientlist.php");
+      // exit();
     }else{
       echo '<script type="text/javascript">
       jQuery(function validation(){
@@ -83,11 +90,11 @@
   $pnumerotel_db = $row['pnumerotel'];
   $pfnac_db = $row['pfnac'];
 
-  if($_SESSION['role']=="Admin"){
-    include_once'header.php';
-  }else{
-    include_once'headeruser.php';
-  }
+  // if($_SESSION['role']=="Admin"){
+  //   include_once'header.php';
+  // }else{
+  //   include_once'headeruser.php';
+  // }
 
 ?>
 
