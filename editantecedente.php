@@ -6,7 +6,12 @@
     header('location:index.php');
     exit();
   }
- 
+  
+  if($_SESSION['role']=="Admin"){
+    include_once'header.php';
+  }else{
+    include_once'headeruser.php';
+  }
 
   // getting the checkin id from checkin list page as well the data from that page
   $id = $_GET['id'];
@@ -42,11 +47,12 @@
           icon: "success",
           button: "Ok",
         });
+        window.location.href = "antecedentes_list.php";
 
-      })
+      }, 5000);
       </script>';
-      header("location:antecedentes_list.php");
-      exit();
+      // header("location:antecedentes_list.php");
+      // exit();
     }else{
       echo '<script type="text/javascript">
       jQuery(function validation(){
@@ -64,11 +70,11 @@
 
   }
 
-  if($_SESSION['role']=="Admin"){
-    include_once'header.php';
-  }else{
-    include_once'headeruser.php';
-  }
+  // if($_SESSION['role']=="Admin"){
+  //   include_once'header.php';
+  // }else{
+  //   include_once'headeruser.php';
+  // }
 
 
 ?>
