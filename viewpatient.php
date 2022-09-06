@@ -63,7 +63,7 @@
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">Domicilio</label>
-                        <textarea type="text" class="form-control" rows="2" disabled>"'.$row->pdomicilio.'"</textarea>
+                        <textarea type="text" class="form-control" rows="2" disabled>'.$row->pdomicilio.'</textarea>
                       </div>
                     </div> <!-- end first section 6 columns -->
                     <div class="col-sm-6 col-md-6 col-lg-6">   <!-- second section 6 columns -->
