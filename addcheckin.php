@@ -31,16 +31,16 @@
   $papellido_db = $row['papellido'];
 
 
-  $select = $pdo->prepare("SELECT historia FROM tbl_historia WHERE pacienteid=$id");
-  $select->execute();
+  // $select = $pdo->prepare("SELECT historia FROM tbl_historia WHERE pacienteid=$id");
+  // $select->execute();
 
 
-  $row = $select->fetch(PDO::FETCH_ASSOC);
-  if(empty($row)){
-    $historia_db = '';
-  } else {
-    $historia_db = $row['historia'];
-  }
+  // $row = $select->fetch(PDO::FETCH_ASSOC);
+  // if(empty($row)){
+  //   $historia_db = '';
+  // } else {
+  //   $historia_db = $row['historia'];
+  // }
   
 
   //print_r($row);
