@@ -234,12 +234,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <p>Agregar Archivos</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="antecedentes_list.php" class="nav-link">
-                  <i class="fas fa-list-alt"></i>
-                  <p>Lista de Archivos</p>
-                </a>
-              </li>
             </ul>
           </li>
           <li class="nav-item">

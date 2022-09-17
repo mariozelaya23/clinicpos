@@ -73,7 +73,7 @@
                             <td>'.$row->pnumerotel.'</td>
                             <td>'.$row->pfnac.'</td>
                             <td>
-                              <a href="addpatientfiles.php?id='.$row->pid.'" class="btn btn-block btn-warning btn-xs" role="button" name="btnfadd">Agregar Archivos</a>
+                              <a href="addpatientfiles.php?id='.$row->pid.'" class="btn btn-block btn-warning btn-xs" role="button" name="btnfadd">Administrar Archivos</a>
                             </td>
                           </tr>
                         ';
