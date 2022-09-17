@@ -229,7 +229,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="antecedente_list_patient.php" class="nav-link">
+                <a href="file_list_patient.php" class="nav-link">
                   <i class="fas fa-file-upload"></i>
                   <p>Agregar Archivos</p>
                 </a>
