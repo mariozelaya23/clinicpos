@@ -221,6 +221,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-pdf"></i>
+              <p>
+                Archivos
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="antecedente_list_patient.php" class="nav-link">
+                  <i class="fas fa-file-upload"></i>
+                  <p>Agregar Archivos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="antecedentes_list.php" class="nav-link">
+                  <i class="fas fa-list-alt"></i>
+                  <p>Lista de Archivos</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-cog"></i>
               <p>
                 Sistema
