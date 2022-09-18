@@ -26,6 +26,7 @@
   $id_db = $row['pid'];
   $pnombre_db = $row['pnombre'];
   $papellido_db = $row['papellido'];
+  $tel_db = $row['pnumerotel'];
 
 
 ?>
@@ -65,15 +66,16 @@
               <div class="col-sm-4 col-md-4 col-lg-4">   <!-- first section 4 columns -->
                 <div class="form-group">
                   <label for="">Nombre del Paciente</label>
-                  <input type="text" class="form-control" value="" placeholder="" name="txtname">
+                  <input type="text" class="form-control" value="<?php echo $pnombre_db.' '.$papellido_db;?>" placeholder="" name="txtname" disabled>
                 </div>
                 <div class="form-group">
                   <label for="">Número de teléfono</label>
-                  <input type="email" class="form-control" value="" placeholder="" name="txttel">
+                  <input type="email" class="form-control" value="<?php echo $tel_db;?>" placeholder="" name="txttel" disabled>
                 </div>
                 <div class="form-group">
                   <label for="">Seleccione un archivo:</label>
-                  <input type="file" class="form-control" name="myfile">
+                  <input type="file" class="input-group" name="pacientearchivo" required>
+                  <p>Subir archivo</p>
                 </div>
                 <div class="card-footer">
                   <button type="submit" class="btn btn-success" name="btnupload">Subir archivo</button>
@@ -84,7 +86,7 @@
 
                 <div class="card">  <!-- Users Table starts  -->
                   <div class="card-header">
-                    <h3 class="card-title">Usuarios registrados al sistema</h3>
+                    <h3 class="card-title">Lista de archivos del Paciente</h3>
                   </div>
                   <!-- /.card-header -->
                   <div class="card-body table-responsive p-0">
@@ -92,32 +94,30 @@
                       <thead>
                         <tr>
                           <th>#</th>
-                          <th>Nombre</th>
-                          <th>Correo</th>
-                          <th>Contraseña</th>
-                          <th>Role</th>
-                          <th></th>
-                          <th></th>
+                          <th>Archivo</th>
+                          <th>Tipo</th>
+                          <th>Fecha</th>
+                          <th>Descargar</th>
+                          <th>Eliminar</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php 
-                          $select=$pdo->prepare("SELECT * FROM tbl_user ORDER BY userid");
+                          $select=$pdo->prepare("SELECT * FROM tbl_parchivos ORDER BY parchivosid");
                           $select->execute();
 
                           while($row=$select->fetch(PDO::FETCH_OBJ)){  //using while to fetch all the data from the database // using FETCH_OBJ because I'm fetching each fild of the database
                             echo '
                               <tr>
-                                <td>'.$row->userid.'</td>
-                                <td>'.$row->username.'</td>
-                                <td>'.$row->useremail.'</td>
-                                <td>'.$row->password.'</td>
-                                <td>'.$row->role.'</td>
+                                <td>'.$row->parchivosid.'</td>
+                                <td>'.$row->parchivonombre.'</td>
+                                <td>'.$row->parchivoext.'</td>
+                                <td>'.$row->timestamp.'</td>
                                 <td>
-                                  <button type="submit" value="'.$row->userid.'" class="btn btn-block btn-success btn-xs" name="btnedit">Editar</button>
+                                  
                                 </td>
                                 <td>
-                                <a href="uregistration.php?id='.$row->userid.'" class="btn btn-block btn-danger btn-xs" role="button" name="btndelete">Eliminar</a>
+                                  <button id='.$row->parchivosid.' class="btn btn-block btn-danger btn-xs btnarchivodelete">Eliminar</button>
                                 </td>
                               </tr>
                             ';
@@ -152,6 +152,48 @@
     $('#tableusuers').DataTable();
   } );
 </script>
+
+<!-- DELETE BUTTON AJAX CODE -->
+<script>
+  $(document).ready(function(){
+    $(document).on('click','.btnadelete',function(e){
+      //alert('Test');
+      var btn = $(e.currentTarget);
+      var tdh = btn;
+      var id = btn.attr("id");
+      //alert(id);
+      //sweet alert
+      swal({
+        title: "¿Está seguro de desea eliminar el este Antecedente?",
+        text: "¡Una vez eliminado el Antecedente no se puede recuperar este registro!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) { //ajax code
+          $.ajax({
+            url:'deleteantecedente.php',
+            type:'POST',
+            data:{
+              antecedentesidd:id
+            },
+            success:function(data){
+              tdh.parents('tr').hide();
+            }
+          })
+          swal("¡El Antecedente ha sido eliminado exitosamente!", {
+            icon: "success",
+          });
+        } else {
+          swal("¡El Antecedente no fue eliminado");
+        }
+      });
+    });
+  });
+
+</script>
+
 
 <?php
   include_once 'footer.php';
