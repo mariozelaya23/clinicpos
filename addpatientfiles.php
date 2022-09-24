@@ -34,27 +34,28 @@
     $f_size = $_FILES['myfile']['size'];
     $f_extension = explode('.',$f_name);
     $f_extension = strtolower(end($f_extension));
-    $f_newfile = uniqid().'.'. $f_extension;
+    // $f_newfile = uniqid().'.'. $f_extension;
+    // $f_newfile = $f_name.'.'. $f_extension;
 
-    $store = "patientfiles/".$f_newfile;
+    $store = "patientfiles/".$f_name;
 
     if ($f_extension == 'jpg' || $f_extension == 'jpeg' || $f_extension == 'png' || $f_extension == 'gif' || $f_extension == 'pdf'){
         if ($f_size >= 2000000){
-          echo '<script type="text/javascript">
-          jQuery(function validation(){
+          echo 'MAX file size must be 2MB size';
+          // echo '<script type="text/javascript">
+          // jQuery(function validation(){
     
-            swal({
-              title: "Error!",
-              text: "El archivo no puede pesar mas de 5MB",
-              icon: "warning",
-              button: "Ok",
-            });
-    
-          })
-          </script>';
+          //   swal({
+          //     title: "Error!",
+          //     text: "El archivo no puede pesar mas de 5MB",
+          //     icon: "warning",
+          //     button: "Ok",
+          //   });
+          // })
+          // </script>';
         } else {
             if (move_uploaded_file($f_tmp,$store)){
-              $patientfile=$f_newfile;
+              $patientfile=$f_name;
             }
         }
     } else {
@@ -187,7 +188,7 @@
                       </thead>
                       <tbody>
                         <?php 
-                          $select=$pdo->prepare("SELECT * FROM tbl_parchivos ORDER BY parchivosid");
+                          $select=$pdo->prepare("SELECT * FROM tbl_parchivos WHERE pacienteid=$id");
                           $select->execute();
 
                           while($row=$select->fetch(PDO::FETCH_OBJ)){  //using while to fetch all the data from the database // using FETCH_OBJ because I'm fetching each fild of the database
