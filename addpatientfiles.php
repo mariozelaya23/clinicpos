@@ -40,24 +40,64 @@
     $store = "patientfiles/".$f_name;
 
     if ($f_extension == 'jpg' || $f_extension == 'jpeg' || $f_extension == 'png' || $f_extension == 'gif' || $f_extension == 'pdf'){
-        if ($f_size >= 2000000){
-          echo 'MAX file size must be 2MB size';
-          // echo '<script type="text/javascript">
-          // jQuery(function validation(){
-    
-          //   swal({
-          //     title: "Error!",
-          //     text: "El archivo no puede pesar mas de 5MB",
-          //     icon: "warning",
-          //     button: "Ok",
-          //   });
-          // })
-          // </script>';
-        } else {
-            if (move_uploaded_file($f_tmp,$store)){
-              $patientfile=$f_name;
+      if ($f_size >= 50000){
+        $error = '<script type="text/javascript">
+        jQuery(function validation(){
+  
+          swal({
+            title: "Error!",
+            text: "El archivo no puede pesar mas de 5MB",
+            icon: "warning",
+            button: "Ok",
+          });
+  
+        })
+        </script>';
+        echo $error;
+      } else {
+        if (move_uploaded_file($f_tmp,$store)){
+          $patientfile=$f_name;
+
+          if (!isset($errorr)){
+            $insert = $pdo->prepare("INSERT INTO tbl_parchivos(parchivonombre,parchivoext,pacienteid) 
+                                    VALUES(:parchivonombre,:parchivoext,:pacienteid)");
+            
+            $insert->bindParam(':parchivonombre',$patientfile);
+            $insert->bindParam(':parchivoext',$f_extension);
+            $insert->bindParam(':pacienteid',$id_db);
+
+            if($insert->execute()){
+              echo '<script type="text/javascript">
+              jQuery(function validation(){
+        
+                swal({
+                  title: "Archivo subido",
+                  text: "Archivo subido exitosamente",
+                  icon: "success",
+                  button: "Ok",
+                });
+        
+              }, 5000);
+              </script>';
+            }else{
+              echo '<script type="text/javascript">
+              jQuery(function validation(){
+        
+                swal({
+                  title: "ERROR!",
+                  text: "El Archivo no pudo ser subido",
+                  icon: "error",
+                  button: "Ok",
+                });
+        
+              })
+              </script>';
             }
+
+          }
+      
         }
+      }
     } else {
       echo '<script type="text/javascript">
       jQuery(function validation(){
@@ -65,43 +105,6 @@
         swal({
           title: "Warning!",
           text: "Archivo incorrecto, solo puede subir archivos jpg, jpeg, png, gif or pdf",
-          icon: "error",
-          button: "Ok",
-        });
-
-      })
-      </script>';
-    }
-
-    if (!isset($errorr)){
-      $insert = $pdo->prepare("INSERT INTO tbl_parchivos(parchivonombre,parchivoext,pacienteid) 
-                              VALUES(:parchivonombre,:parchivoext,:pacienteid)");
-      
-      $insert->bindParam(':parchivonombre',$patientfile);
-      $insert->bindParam(':parchivoext',$f_extension);
-      $insert->bindParam(':pacienteid',$id_db);
-    }
-
-    if($insert->execute()){
-      echo '<script type="text/javascript">
-      jQuery(function validation(){
-
-        swal({
-          title: "Archivo subido",
-          text: "Archivo subido exitosamente",
-          icon: "success",
-          button: "Ok",
-        });
-
-      }, 5000);
-      </script>';
-    }else{
-      echo '<script type="text/javascript">
-      jQuery(function validation(){
-
-        swal({
-          title: "ERROR!",
-          text: "El Archivo no pudo ser subido",
           icon: "error",
           button: "Ok",
         });
