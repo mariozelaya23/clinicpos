@@ -186,9 +186,7 @@
                     <table id="tableusuers" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th>#</th>
                           <th>Archivo</th>
-                          <th>Tipo</th>
                           <th>Fecha</th>
                           <th>Descargar</th>
                           <th>Eliminar</th>
@@ -202,9 +200,7 @@
                           while($row=$select->fetch(PDO::FETCH_OBJ)){  //using while to fetch all the data from the database // using FETCH_OBJ because I'm fetching each fild of the database
                             echo '
                               <tr>
-                                <td>'.$row->parchivosid.'</td>
                                 <td>'.$row->parchivonombre.'</td>
-                                <td>'.$row->parchivoext.'</td>
                                 <td>'.$row->timestamp.'</td>
                                 <td>
                                   
@@ -257,8 +253,8 @@
       //alert(id);
       //sweet alert
       swal({
-        title: "¿Está seguro de desea eliminar el este Antecedente?",
-        text: "¡Una vez eliminado el Antecedente no se puede recuperar este registro!",
+        title: "¿Está seguro de desea eliminar el archivo?",
+        text: "¡Una vez eliminado el archivo no se puede recuperar",
         icon: "warning",
         buttons: true,
         dangerMode: true,
@@ -266,20 +262,20 @@
       .then((willDelete) => {
         if (willDelete) { //ajax code
           $.ajax({
-            url:'deleteantecedente.php',
+            url:'deletepfile.php',
             type:'POST',
             data:{
-              antecedentesidd:id
+              parchivosidd:id
             },
             success:function(data){
               tdh.parents('tr').hide();
             }
           })
-          swal("¡El Antecedente ha sido eliminado exitosamente!", {
+          swal("¡El archivo ha sido eliminado exitosamente!", {
             icon: "success",
           });
         } else {
-          swal("¡El Antecedente no fue eliminado");
+          swal("¡El archivo no fue eliminado");
         }
       });
     });
