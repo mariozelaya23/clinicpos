@@ -34,13 +34,17 @@
     $f_size = $_FILES['myfile']['size'];
     $f_extension = explode('.',$f_name);
     $f_extension = strtolower(end($f_extension));
+    // $f_newfile = uniqid().'-'.$f_name.'.'. $f_extension;
+    $f_newfile = uniqid().'-'. $f_name;
     // $f_newfile = uniqid().'.'. $f_extension;
     // $f_newfile = $f_name.'.'. $f_extension;
+    
 
-    $store = "patientfiles/".$f_name;
+    // $store = "patientfiles/".$f_name;
+    $store = "patientfiles/".$f_newfile;
 
     if ($f_extension == 'jpg' || $f_extension == 'jpeg' || $f_extension == 'png' || $f_extension == 'gif' || $f_extension == 'pdf'){
-      if ($f_size >= 50000){
+      if ($f_size >= 5000000){
         $error = '<script type="text/javascript">
         jQuery(function validation(){
   
@@ -56,13 +60,14 @@
         echo $error;
       } else {
         if (move_uploaded_file($f_tmp,$store)){
-          $patientfile=$f_name;
+          // $patientfile=$f_name;
 
           if (!isset($errorr)){
             $insert = $pdo->prepare("INSERT INTO tbl_parchivos(parchivonombre,parchivoext,pacienteid) 
                                     VALUES(:parchivonombre,:parchivoext,:pacienteid)");
             
-            $insert->bindParam(':parchivonombre',$patientfile);
+            // $insert->bindParam(':parchivonombre',$patientfile);
+            $insert->bindParam(':parchivonombre',$f_newfile);
             $insert->bindParam(':parchivoext',$f_extension);
             $insert->bindParam(':pacienteid',$id_db);
 
