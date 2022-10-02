@@ -304,7 +304,6 @@
                           <th>#</th>
                           <th>Nombre</th>
                           <th>Correo</th>
-                          <th>Contraseña</th>
                           <th>Role</th>
                           <th></th>
                           <th></th>
@@ -321,7 +320,6 @@
                                 <td>'.$row->userid.'</td>
                                 <td>'.$row->username.'</td>
                                 <td>'.$row->useremail.'</td>
-                                <td>'.$row->password.'</td>
                                 <td>'.$row->role.'</td>
                                 <td>
                                   <button type="submit" value="'.$row->userid.'" class="btn btn-block btn-success btn-xs" name="btnedit">Editar</button>
