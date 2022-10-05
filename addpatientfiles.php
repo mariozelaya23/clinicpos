@@ -153,10 +153,10 @@
         </div>
         <!-- /.card-header -->
         <!-- form start -->
-        <form role="form" action="" method="POST" enctype="multipart/form-data">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-4 col-md-4 col-lg-4">   <!-- first section 4 columns -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-4 col-md-4 col-lg-4">   <!-- first section 4 columns -->
+              <form role="form" action="" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="">Nombre del Paciente</label>
                   <input type="text" class="form-control" value="<?php echo $pnombre_db.' '.$papellido_db;?>" placeholder="" name="txtname" disabled>
@@ -173,59 +173,60 @@
                 <div class="card-footer">
                   <button type="submit" class="btn btn-success" name="btnupload">Subir archivo</button>
                 </div>
-              </div> <!-- end section 4 columns -->
+              </form> 
+            </div> <!-- end section 4 columns -->
+            <div class="col-sm-8 col-md-8 col-lg-8">  <!-- second section 8 columns  --> 
+            <div class="card">  <!-- Users Table starts  -->
+              <div class="card-header">
+                <h3 class="card-title">Lista de archivos del Paciente</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table id="tableusuers" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Archivo</th>
+                      <th>Fecha</th>
+                      <th>Descargar</th>
+                      <th>Eliminar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                      $select=$pdo->prepare("SELECT * FROM tbl_parchivos WHERE pacienteid=$id");
+                      $select->execute();
 
-              <div class="col-sm-8 col-md-8 col-lg-8">  <!-- second section 8 columns  --> 
+                      while($row=$select->fetch(PDO::FETCH_OBJ)){  //using while to fetch all the data from the database // using FETCH_OBJ because I'm fetching each fild of the database
+                        echo '
+                          <tr>
+                            <td>'.$row->parchivonombre.'</td>
+                            <td>'.$row->timestamp.'</td>
+                            <td>
+                              
+                            </td>
+                            <td>
+                              <button id='.$row->parchivosid.' class="btn btn-block btn-danger btn-xs btnarchivodelete">Eliminar</button>
+                            </td>
+                          </tr>
+                        ';
+                      }
+                    ?>
+                  </tbody>
+                </table> <!-- Users Table Ends  -->
+              </div>
+              <!-- /.card-body -->
+            </div> 
+            <!-- /.card -->  
+          </div> <!-- end section 8 columns  --> 
+        </div>
+        <!-- /.card-body -->
 
-                <div class="card">  <!-- Users Table starts  -->
-                  <div class="card-header">
-                    <h3 class="card-title">Lista de archivos del Paciente</h3>
-                  </div>
-                  <!-- /.card-header -->
-                  <div class="card-body table-responsive p-0">
-                    <table id="tableusuers" class="table table-bordered table-striped">
-                      <thead>
-                        <tr>
-                          <th>Archivo</th>
-                          <th>Fecha</th>
-                          <th>Descargar</th>
-                          <th>Eliminar</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php 
-                          $select=$pdo->prepare("SELECT * FROM tbl_parchivos WHERE pacienteid=$id");
-                          $select->execute();
+        <div class="card-body">
+          <div class="row">
 
-                          while($row=$select->fetch(PDO::FETCH_OBJ)){  //using while to fetch all the data from the database // using FETCH_OBJ because I'm fetching each fild of the database
-                            echo '
-                              <tr>
-                                <td>'.$row->parchivonombre.'</td>
-                                <td>'.$row->timestamp.'</td>
-                                <td>
-                                  
-                                </td>
-                                <td>
-                                  <button id='.$row->parchivosid.' class="btn btn-block btn-danger btn-xs btnarchivodelete">Eliminar</button>
-                                </td>
-                              </tr>
-                            ';
-                          }
-                        ?>
-                      </tbody>
-                    </table>
-                  </div>
-                  <!-- /.card-body -->
-                </div> <!-- Users Table Ends  -->
-                <!-- /.card -->  
-
-
-              </div> <!-- end section 8 columns  --> 
-            </div>  
-          
           </div>
-          <!-- /.card-body -->
-        </form>
+        </div>          
+
       </div>
       <!-- /.card -->
 
@@ -245,7 +246,7 @@
 <!-- DELETE BUTTON AJAX CODE -->
 <script>
   $(document).ready(function(){
-    $(document).on('click','.btnadelete',function(e){
+    $(document).on('click','.btnarchivodelete',function(e){
       //alert('Test');
       var btn = $(e.currentTarget);
       var tdh = btn;
