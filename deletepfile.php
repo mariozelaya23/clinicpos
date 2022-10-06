@@ -13,7 +13,7 @@
     }
 
     
-    $id=$_POST['pidd'];  //pidd comes from the ajax code in patientlist.php
+    $id=$_POST['parchivosidd'];  //pidd comes from the ajax code in patientlist.php
 
     $sql="DELETE FROM tbl_parchivos WHERE parchivosid=$id";
     $delete=$pdo->prepare($sql);
