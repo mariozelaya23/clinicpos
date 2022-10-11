@@ -119,8 +119,6 @@
     }
 
   }
-  
-
 
 ?>
 
@@ -205,7 +203,7 @@
                               
                             </td>
                             <td>
-                              <button id='.$row->parchivosid.' class="btn btn-block btn-danger btn-xs btnarchivodelete">Eliminar</button>
+                              <button file_id='.$row->parchivosid.' class="btn btn-block btn-danger btn-xs btnarchivodelete">Eliminar</button>
                             </td>
                           </tr>
                         ';
@@ -250,7 +248,7 @@
       //alert('Test');
       var btn = $(e.currentTarget);
       var tdh = btn;
-      var id = btn.attr("id");
+      var id = btn.attr("file_id");
       //alert(id);
       //sweet alert
       swal({
