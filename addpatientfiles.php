@@ -200,7 +200,7 @@
                             <td>'.$row->parchivonombre.'</td>
                             <td>'.$row->timestamp.'</td>
                             <td>
-                              
+                              <a href="download_patient_file.php?parchivosid='.$row->parchivosid.'" class="btn btn-block btn-success btn-xs">Descargar</a>
                             </td>
                             <td>
                               <button file_id='.$row->parchivosid.' class="btn btn-block btn-danger btn-xs btnarchivodelete">Eliminar</button>
