@@ -1,4 +1,5 @@
-<?php 
+<?php
+    ob_start();
     include_once 'connectdb.php';
     session_start();
 
@@ -6,23 +7,34 @@
         header('location:index.php');
     }
 
-    if($_SESSION['role']=="Admin"){
-        include_once'header.php';
-    }else{
-        include_once'headeruser.php';
-    }
-
-    if(isset($_REQUEST['parchivosid']))
+    if(isset($_GET['parchivosid']))
     {
-        $id=$_REQUEST['parchivosid'];
+        $id=$_GET['parchivosid'];
+
+        // fetch file to download from database
         $select=$pdo->prepare("SELECT * FROM tbl_parchivos WHERE parchivosid=$id");
         $select->execute();
         $row=$select->fetch(PDO::FETCH_ASSOC);
+
         $filename=$row['parchivonombre'];
         $parchivosid=$row['parchivosid'];
-        header("Content-Disposition: attachment; filename=".$filename);
-		header("Content-Type: application/octet-stream;");
-		readfile("patientfiles/".$filename);
+        $filepath = __DIR__."/patientfiles/".$filename;
+        $mime = mime_content_type($filepath);
+    
+
+        if (is_file($filepath))
+        {
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename=' . basename($filepath));
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($filepath));
+            readfile($filepath);
+            exit;
+        }
+
     }
 
 
