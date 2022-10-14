@@ -301,7 +301,6 @@
                     <table id="tableusuers" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th>#</th>
                           <th>Nombre</th>
                           <th>Correo</th>
                           <th>Role</th>
@@ -317,7 +316,6 @@
                           while($row=$select->fetch(PDO::FETCH_OBJ)){  //using while to fetch all the data from the database // using FETCH_OBJ because I'm fetching each fild of the database
                             echo '
                               <tr>
-                                <td>'.$row->userid.'</td>
                                 <td>'.$row->username.'</td>
                                 <td>'.$row->useremail.'</td>
                                 <td>'.$row->role.'</td>
