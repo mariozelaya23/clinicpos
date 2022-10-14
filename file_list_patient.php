@@ -48,7 +48,6 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
-                    <th>#</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Domicilio</th>
@@ -65,7 +64,6 @@
                       while($row=$select->fetch(PDO::FETCH_OBJ)){
                         echo '
                           <tr>
-                            <td>'.$row->pid.'</td>
                             <td>'.$row->pnombre.'</td>
                             <td>'.$row->papellido.'</td>
                             <td>'.$row->pdomicilio.'</td>
@@ -82,7 +80,6 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                    <th>#</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Domicilio</th>
