@@ -50,8 +50,6 @@
                   <tr>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Domicilio</th>
-                    <th>Email</th>
                     <th>Teléfono</th>
                     <th>F.Nac</th>
                     <th></th>
@@ -66,8 +64,6 @@
                           <tr>
                             <td>'.$row->pnombre.'</td>
                             <td>'.$row->papellido.'</td>
-                            <td>'.$row->pdomicilio.'</td>
-                            <td>'.$row->pemail.'</td>
                             <td>'.$row->pnumerotel.'</td>
                             <td>'.$row->pfnac.'</td>
                             <td>
@@ -82,8 +78,6 @@
                   <tr>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Domicilio</th>
-                    <th>Email</th>
                     <th>Teléfono</th>
                     <th>F.Nac</th>
                     <th></th>
